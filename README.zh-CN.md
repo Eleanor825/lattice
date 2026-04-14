@@ -137,6 +137,36 @@ Phase 2 计划支持：
 
 所以目前 Lattice 已经具备未来平台的 **数据基础层**，但还不是完整的训练平台。
 
+## 平台对比
+
+下面这张表集中比较对 Lattice 最关键的能力组合。
+
+标记说明：
+
+- `✅` = 明确支持
+- `◐` = 部分支持
+- `❌` = 未明显支持
+- `🎯` = Lattice 的目标能力
+
+| 平台 | 开源 | 科学/材料垂域聚焦 | 多源数据编译 | provenance / license / dedup 作为核心 | 统一覆盖 pretraining + continued pretraining + fine-tuning + post-training 的平台叙事 | 本地执行 | Spark | Flink | 对话式 / 拖拽式 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| **Lattice（当前）** | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ◐ | ❌ |
+| **Lattice（目标）** | ✅ | ✅ | ✅ | ✅ | 🎯 | 🎯 | 🎯 | 🎯 | 🎯 |
+| NVIDIA NeMo Curator | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ◐ | ❌ | ❌ |
+| Databricks Mosaic AI | ❌ | ❌ | ◐ | ◐ | ✅ | ❌ | ✅ | ❌ | ◐ |
+| H2O LLM Studio / DataStudio | ❌ | ❌ | ◐ | ◐ | ◐ | ◐ | ❌ | ❌ | ✅ |
+| Sparkflows | ❌ | ❌ | ◐ | ❌ | ◐ | ◐ | ✅ | ❌ | ✅ |
+| Kubeflow | ✅ | ❌ | ❌ | ❌ | ◐ | ✅ | ❌ | ❌ | ❌ |
+
+Lattice 想做、而大多数现有平台没有完整组合在一起的能力包括：
+
+- 把科学/材料作为第一目标场景
+- 把原始 scientific sources 当成输入层，而不是只接现成训练集
+- 把 provenance / license / dedup 作为平台核心能力
+- 把数据编译成多种可复用训练视图
+- 同时支持本地执行和分布式执行
+- 从数据平台自然走向训练平台
+
 ## 每日更新
 
 ### 2026-04-13

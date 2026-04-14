@@ -136,6 +136,36 @@ What is already in place:
 
 So today, Lattice is already functioning as the **data foundation layer** of the future platform, but it is not yet the full training platform described above.
 
+## Platform Comparison
+
+The table below focuses on the capability combination that matters most for Lattice.
+
+Legend:
+
+- `✅` = clearly supported
+- `◐` = partially supported
+- `❌` = not clearly supported
+- `🎯` = Lattice target capability
+
+| Platform | Open Source | Science / Materials Focus | Multi-source Data Compilation | Provenance / License / Dedup as Core | Unified Story Across Pretraining + Continued Pretraining + Fine-tuning + Post-training | Local Execution | Spark | Flink | Conversational / Drag-and-drop |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| **Lattice (Current)** | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ◐ | ❌ |
+| **Lattice (Target)** | ✅ | ✅ | ✅ | ✅ | 🎯 | 🎯 | 🎯 | 🎯 | 🎯 |
+| NVIDIA NeMo Curator | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ◐ | ❌ | ❌ |
+| Databricks Mosaic AI | ❌ | ❌ | ◐ | ◐ | ✅ | ❌ | ✅ | ❌ | ◐ |
+| H2O LLM Studio / DataStudio | ❌ | ❌ | ◐ | ◐ | ◐ | ◐ | ❌ | ❌ | ✅ |
+| Sparkflows | ❌ | ❌ | ◐ | ❌ | ◐ | ◐ | ✅ | ❌ | ✅ |
+| Kubeflow | ✅ | ❌ | ❌ | ❌ | ◐ | ✅ | ❌ | ❌ | ❌ |
+
+What Lattice is trying to combine, and most existing platforms do not combine in one place:
+
+- science / materials as the first-class domain
+- raw scientific sources as the input layer, not just pre-made datasets
+- provenance / license / dedup as a core platform capability
+- training-data compilation into multiple reusable views
+- local execution plus distributed execution
+- a path from data platform to training platform
+
 ## Daily Updates
 
 ### 2026-04-13
