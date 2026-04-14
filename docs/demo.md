@@ -1,5 +1,7 @@
 # Lattice Demo
 
+- [Open the HTML showcase](demo-showcase.html)
+
 ## Demo A: Real-source Compilation
 
 Lattice can already fetch a small real-source batch and compile it into training-ready views.

@@ -353,6 +353,7 @@ Lattice 想做、而大多数现有平台没有完整组合在一起的能力包
 - [Storage Architecture](docs/storage_architecture.md)
 - [Engine Runtime Notes](docs/engines.md)
 - [Demo Summary](docs/demo.md)
+- [Demo Showcase](docs/demo-showcase.html)
 - [Source Catalog](docs/source-catalog.md)
 - [Platform Comparison](docs/platform-comparison.md)
 - [Research Notes Index](docs/research/README.md)
