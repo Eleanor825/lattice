@@ -257,4 +257,5 @@ Phase 2 计划支持：
 - [Storage Architecture](docs/storage_architecture.md)
 - [Engine Runtime Notes](docs/engines.md)
 - [Demo Summary](docs/demo.md)
+- [Platform Comparison](docs/platform-comparison.md)
 - [Research Notes Index](docs/research/README.md)
