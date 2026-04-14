@@ -1,62 +1,560 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="0; url=docs/demo-showcase.html">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lattice Demo</title>
+    <title>Lattice Platform</title>
     <style>
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        background: linear-gradient(180deg, #fcfaf6 0%, #f4efe7 100%);
-        font-family: "Avenir Next", "Helvetica Neue", "Segoe UI", sans-serif;
-        color: #13212f;
+      :root {
+        --bg: #f6f0e8;
+        --paper: rgba(255, 252, 247, 0.88);
+        --line: rgba(19, 33, 47, 0.12);
+        --ink: #13212f;
+        --muted: #5c6977;
+        --teal: #0f766e;
+        --amber: #b45309;
+        --blue: #1d4ed8;
+        --rose: #9f1239;
+        --shadow: 0 28px 80px rgba(19, 33, 47, 0.12);
       }
 
-      .card {
-        width: min(720px, calc(100vw - 32px));
-        padding: 32px;
-        border-radius: 28px;
-        background: rgba(255, 252, 247, 0.92);
-        border: 1px solid rgba(19, 33, 47, 0.1);
-        box-shadow: 0 24px 70px rgba(19, 33, 47, 0.12);
-        text-align: center;
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(15, 118, 110, 0.18), transparent 28%),
+          radial-gradient(circle at 82% 12%, rgba(180, 83, 9, 0.14), transparent 22%),
+          radial-gradient(circle at 50% 100%, rgba(29, 78, 216, 0.09), transparent 28%),
+          linear-gradient(180deg, #fdfbf7 0%, var(--bg) 100%);
+        font-family: "Avenir Next", "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      }
+
+      .shell {
+        width: min(1200px, calc(100vw - 32px));
+        margin: 0 auto;
+        padding: 20px 0 56px;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+        gap: 20px;
+      }
+
+      .brand {
+        font-size: 15px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(19, 33, 47, 0.06);
+        color: var(--ink);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.2fr 0.9fr;
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .panel {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(14px);
+      }
+
+      .hero-copy {
+        padding: 38px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(15, 118, 110, 0.1);
+        color: var(--teal);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
       h1 {
-        margin: 0 0 14px;
-        font-size: clamp(38px, 7vw, 64px);
-        line-height: 0.95;
-        letter-spacing: -0.05em;
+        margin: 18px 0 18px;
+        font-size: clamp(42px, 7vw, 88px);
+        line-height: 0.92;
+        letter-spacing: -0.06em;
       }
 
-      p {
+      .hero-copy p {
         margin: 0;
-        color: #556573;
+        color: var(--muted);
         font-size: 18px;
+        line-height: 1.72;
+      }
+
+      .hero-copy p + p {
+        margin-top: 14px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 18px;
+        border-radius: 18px;
+        text-decoration: none;
+        font-weight: 800;
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .button:hover {
+        transform: translateY(-1px);
+      }
+
+      .button.primary {
+        background: var(--ink);
+        color: #fff;
+        box-shadow: 0 18px 40px rgba(19, 33, 47, 0.18);
+      }
+
+      .button.secondary {
+        background: rgba(19, 33, 47, 0.06);
+        color: var(--ink);
+      }
+
+      .hero-side {
+        display: grid;
+        gap: 16px;
+        padding: 26px;
+      }
+
+      .metric {
+        padding: 18px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(19, 33, 47, 0.08);
+      }
+
+      .metric-label {
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 800;
+      }
+
+      .metric-value {
+        margin-top: 10px;
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      .metric-note {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .section {
+        margin-top: 28px;
+      }
+
+      .section-header {
+        margin-bottom: 16px;
+      }
+
+      .section-title {
+        margin: 0;
+        font-size: 26px;
+        letter-spacing: -0.03em;
+      }
+
+      .section-subtitle {
+        margin: 8px 0 0;
+        color: var(--muted);
         line-height: 1.7;
       }
 
-      a {
-        display: inline-block;
-        margin-top: 24px;
-        padding: 12px 16px;
-        border-radius: 16px;
-        background: #13212f;
-        color: #fff;
-        text-decoration: none;
-        font-weight: 700;
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .card-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .card-badge.teal {
+        background: rgba(15, 118, 110, 0.1);
+        color: var(--teal);
+      }
+
+      .card-badge.amber {
+        background: rgba(180, 83, 9, 0.1);
+        color: var(--amber);
+      }
+
+      .card-badge.blue {
+        background: rgba(29, 78, 216, 0.1);
+        color: var(--blue);
+      }
+
+      .card-badge.rose {
+        background: rgba(159, 18, 57, 0.1);
+        color: var(--rose);
+      }
+
+      .card h3 {
+        margin: 14px 0 10px;
+        font-size: 28px;
+        letter-spacing: -0.03em;
+      }
+
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .bullets {
+        margin: 16px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .flow-step {
+        padding: 18px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(19, 33, 47, 0.08);
+      }
+
+      .flow-step strong {
+        display: block;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .flow-step span {
+        display: block;
+        margin-top: 10px;
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      .flow-step p {
+        margin: 10px 0 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .demo-banner {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 18px;
+        align-items: center;
+        padding: 24px 28px;
+      }
+
+      .demo-banner h3 {
+        margin: 0 0 10px;
+        font-size: 30px;
+        letter-spacing: -0.03em;
+      }
+
+      .demo-banner p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .roadmap {
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .roadmap img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      @media (max-width: 1040px) {
+        .hero,
+        .grid-3,
+        .grid-4,
+        .flow,
+        .demo-banner {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .shell {
+          width: min(100vw - 18px, 1200px);
+          padding: 14px 0 42px;
+        }
+
+        .hero-copy,
+        .hero-side,
+        .card,
+        .demo-banner {
+          padding: 22px;
+        }
+
+        h1 {
+          font-size: clamp(34px, 10vw, 62px);
+        }
       }
     </style>
   </head>
   <body>
-    <main class="card">
-      <h1>Lattice</h1>
-      <p>Redirecting to the local demo showcase page.</p>
-      <a href="docs/demo-showcase.html">Open Demo Showcase</a>
+    <main class="shell">
+      <nav class="nav">
+        <div class="brand">Lattice Platform</div>
+        <div class="nav-links">
+          <a class="chip" href="README.md">English</a>
+          <a class="chip" href="README.zh-CN.md">中文</a>
+          <a class="chip" href="docs/demo-showcase.html">Demo</a>
+          <a class="chip" href="docs/platform-comparison.md">Comparison</a>
+          <a class="chip" href="docs/source-catalog.md">Sources</a>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <div class="panel hero-copy">
+          <div class="eyebrow">Data-Centric Training Platform</div>
+          <h1>从多源数据到模型优化，一站式搭起来。</h1>
+          <p>
+            Lattice 要做的是一个真正可执行的平台：能够自动从各种数据来源收集并处理高质量训练数据，
+            然后把这些数据接到完整的大模型训练与优化流程里。
+          </p>
+          <p>
+            它不仅要支持从零开始训练模型（pretraining）、在已有模型上继续训练（continued pretraining）、
+            针对具体任务优化（fine-tuning），也要支持安全与对齐优化（post-training）。
+          </p>
+          <p>
+            最终用户应该可以通过对话或拖拽的方式完成整个流程，像搭积木一样完成大模型训练与优化，而不需要深入编写复杂代码。
+          </p>
+          <div class="actions">
+            <a class="button primary" href="docs/demo-showcase.html">Open Current Demo</a>
+            <a class="button secondary" href="README.zh-CN.md">Read README.zh-CN</a>
+            <a class="button secondary" href="docs/source-catalog.md">Browse Sources</a>
+          </div>
+        </div>
+
+        <div class="panel hero-side">
+          <div class="metric">
+            <div class="metric-label">Core Promise</div>
+            <div class="metric-value">Data → Model</div>
+            <div class="metric-note">把分散数据源直接连接到模型训练与优化工作流。</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Training Scope</div>
+            <div class="metric-value">4 Stages</div>
+            <div class="metric-note">Pretrain、Continue、Fine-tune、Post-train 都纳入平台范围。</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Interaction</div>
+            <div class="metric-value">Chat + DnD</div>
+            <div class="metric-note">对话式控制加拖拽式编排，降低训练与优化门槛。</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Execution</div>
+            <div class="metric-value">Local First</div>
+            <div class="metric-note">先在本地开发与验证，再扩展到 Spark / Flink 等执行层。</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">平台做什么</h2>
+          <p class="section-subtitle">
+            这不是一个只做数据抓取的工具，也不是一个只做微调界面的产品，而是把数据、训练、优化和交互统一起来的平台。
+          </p>
+        </div>
+        <div class="flow">
+          <div class="flow-step">
+            <strong>Step 1</strong>
+            <span>Collect</span>
+            <p>从论文、数据库、知识图谱、专利、仓库等多源数据入口自动收集数据。</p>
+          </div>
+          <div class="flow-step">
+            <strong>Step 2</strong>
+            <span>Process</span>
+            <p>进行清洗、去重、结构化、schema 映射、来源追踪和质量过滤。</p>
+          </div>
+          <div class="flow-step">
+            <strong>Step 3</strong>
+            <span>Compile</span>
+            <p>把数据编译成 pretraining、QA、instruction、knowledge 等可训练视图。</p>
+          </div>
+          <div class="flow-step">
+            <strong>Step 4</strong>
+            <span>Train</span>
+            <p>将数据接到 pretraining、continued pretraining、fine-tuning 和 post-training 流程。</p>
+          </div>
+          <div class="flow-step">
+            <strong>Step 5</strong>
+            <span>Operate</span>
+            <p>通过 chat、drag-and-drop 和 reusable blocks 来控制整条工作流。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">四类训练与优化能力</h2>
+          <p class="section-subtitle">
+            平台必须面向大模型生命周期，而不是只做其中某一小段。
+          </p>
+        </div>
+        <div class="grid-4">
+          <article class="panel card">
+            <span class="card-badge teal">Pretraining</span>
+            <h3>从零训练</h3>
+            <p>为从头训练准备高质量语料、结构化记录和可复现实验输入。</p>
+          </article>
+          <article class="panel card">
+            <span class="card-badge amber">Continue</span>
+            <h3>继续训练</h3>
+            <p>把垂域数据稳定接到已有模型上，做 continued pretraining 和领域适配。</p>
+          </article>
+          <article class="panel card">
+            <span class="card-badge blue">Fine-tune</span>
+            <h3>任务优化</h3>
+            <p>把 QA、instruction、task-specific 样本组织起来，支持下游任务优化。</p>
+          </article>
+          <article class="panel card">
+            <span class="card-badge rose">Post-train</span>
+            <h3>安全与对齐</h3>
+            <p>把对齐、安全、偏好和后训练流程纳入同一平台工作流，而不是额外拼接。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">用户体验层</h2>
+          <p class="section-subtitle">
+            平台最终不是要求用户自己写满屏训练脚本，而是让复杂流程被可视化、模块化和可对话化。
+          </p>
+        </div>
+        <div class="grid-3">
+          <article class="panel card">
+            <span class="card-badge teal">Chat</span>
+            <h3>对话式控制</h3>
+            <p>用自然语言描述数据构建、训练目标和优化意图，由平台补齐工作流。</p>
+          </article>
+          <article class="panel card">
+            <span class="card-badge amber">Drag &amp; Drop</span>
+            <h3>拖拽式编排</h3>
+            <p>把 source、filters、views、training blocks 直接拼接成一条可执行链。</p>
+          </article>
+          <article class="panel card">
+            <span class="card-badge blue">Reusable Blocks</span>
+            <h3>积木式复用</h3>
+            <p>把复杂流程拆成标准模块，让研究员和工程师都能复用和快速迭代。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">当前可运行展示</h2>
+          <p class="section-subtitle">
+            现在仓库里已经有一个可以打开、可以运行、可以验证的 demo，而不是只有平台概念。
+          </p>
+        </div>
+        <div class="panel demo-banner">
+          <div>
+            <h3>查看当前 Demo Showcase</h3>
+            <p>
+              这里包含 real-source data compilation、local / Spark runtime execution、
+              命令、manifest 和当前引擎状态。
+            </p>
+          </div>
+          <a class="button primary" href="docs/demo-showcase.html">Open Showcase</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">平台路线图</h2>
+          <p class="section-subtitle">
+            Lattice 当前已经在做数据基础层，下一步是把它接到完整训练平台和低门槛交互层。
+          </p>
+        </div>
+        <div class="panel roadmap">
+          <img src="figures/phase1-phase2-roadmap.png" alt="Lattice phase roadmap">
+        </div>
+      </section>
     </main>
   </body>
 </html>
