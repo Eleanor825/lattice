@@ -146,14 +146,14 @@ Legend:
 - `◐` = partially supported
 - `❌` = not clearly supported
 
-| Platform | Open | Sci/Mat | Compiler | Traceability | Pretrain | Continue | Fine-tune | Post-train | Local | Spark | Flink | Chat / DnD |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| **Lattice** | ✅ | ✅ | ✅ | ✅ | ◐ | ◐ | ◐ | ◐ | ✅ | ✅ | ◐ | ❌ |
-| NVIDIA NeMo Curator | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ | ◐ | ❌ | ❌ |
-| Databricks Mosaic AI | ❌ | ❌ | ◐ | ◐ | ✅ | ✅ | ✅ | ◐ | ❌ | ✅ | ❌ | ◐ |
-| H2O LLM Studio / DataStudio | ❌ | ❌ | ◐ | ◐ | ❌ | ◐ | ✅ | ◐ | ◐ | ❌ | ❌ | ✅ |
-| Sparkflows | ❌ | ❌ | ◐ | ❌ | ❌ | ◐ | ✅ | ❌ | ◐ | ✅ | ❌ | ✅ |
-| Kubeflow | ✅ | ❌ | ❌ | ❌ | ◐ | ◐ | ✅ | ◐ | ✅ | ❌ | ❌ | ❌ |
+| Platform | Open | Sci/Mat | Compiler | Trace | Pretrain | Continue | Fine-tune | Post-train | Local | Chat / DnD |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| **Lattice** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| NVIDIA NeMo Curator | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Databricks Mosaic AI | ❌ | ❌ | ◐ | ◐ | ✅ | ✅ | ✅ | ◐ | ❌ | ◐ |
+| H2O LLM Studio / DataStudio | ❌ | ❌ | ◐ | ◐ | ❌ | ◐ | ✅ | ◐ | ◐ | ✅ |
+| Sparkflows | ❌ | ❌ | ◐ | ❌ | ❌ | ◐ | ✅ | ❌ | ◐ | ✅ |
+| Kubeflow | ✅ | ❌ | ❌ | ❌ | ◐ | ◐ | ✅ | ◐ | ✅ | ❌ |
 
 What Lattice is trying to combine, and most existing platforms do not combine in one place:
 
