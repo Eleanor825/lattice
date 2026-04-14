@@ -1,84 +1,101 @@
 # Lattice
 
-> An open-source data compiler for scientific and materials foundation models.
+> An open-source data-centric platform for large-model training and optimization in science and materials.
 
-Lattice is a data-centric project for turning fragmented scientific sources into reusable, provenance-aware, training-ready datasets.
+Lattice is a platform for building, organizing, and using high-quality training data across the large-model lifecycle: pretraining, continued pretraining, fine-tuning, and post-training.
+
+It starts from the hardest part first: turning fragmented scientific sources into structured, provenance-aware, training-ready data.
 
 ![Lattice roadmap](figures/phase1-phase2-roadmap.png)
 
 ## Project Goal
 
-The goal of Lattice is to build a long-term data infrastructure for foundation models in science and materials.
+The goal of Lattice is to build a platform that can automatically collect, process, organize, and use high-quality training data from many different sources, and make the full model-training workflow easier to operate.
 
-We do not want data collection to remain a one-off scraping workflow. We want it to become a reproducible system that can:
+In the long run, Lattice should support:
 
-- connect heterogeneous scientific sources
-- normalize them into a stable schema
-- preserve provenance, licensing, and dedup information
-- compile them into reusable training-ready dataset views
-- eventually learn which data is more valuable and how it should be used
+- pretraining from scratch
+- continued pretraining on top of existing models
+- task-specific fine-tuning
+- safety and alignment optimization in post-training
 
-## Why This Project
+And it should let users complete these workflows through:
 
-Scientific and materials data is split across many incompatible sources:
+- conversational interaction
+- drag-and-drop composition
+- reusable pipeline blocks
 
-- papers and preprints
-- structured materials databases
-- chemistry resources
-- repositories and archives
-- patents
-- educational resources
+The intended experience is that users can assemble large-model training and optimization workflows like building blocks, without needing to hand-write complex code for every step.
 
-This creates a practical bottleneck:
+## Why This Platform Is Needed
 
-1. useful data is scattered and hard to unify
-2. most collected data is not directly training-ready
-3. data usage is still largely heuristic
+Today, high-quality model training in scientific domains is difficult for two reasons at once:
 
-Lattice exists because progress in scientific foundation models is increasingly constrained by data quality, structure, provenance, and reuse, not just by model architecture.
+1. **The data problem**
+   Scientific and materials data is fragmented across papers, preprints, databases, repositories, patents, and educational resources.
 
-## What Lattice Builds
+2. **The workflow problem**
+   Even after data is collected, users still need to manually connect data preparation, pretraining, continued pretraining, fine-tuning, and post-training pipelines.
 
-### Phase 1: Data Compiler
+This means that the main bottleneck is not just model design. It is also:
 
-Phase 1 builds the core data compiler.
+- how to gather data
+- how to standardize it
+- how to track provenance and licensing
+- how to turn it into training-ready views
+- how to connect it to downstream training workflows
 
-Its job is to take heterogeneous raw sources and turn them into normalized, provenance-aware, training-ready records and dataset views.
+Lattice is meant to solve both the data layer and the workflow layer, starting from data infrastructure and expanding into training orchestration.
 
-Phase 1 focuses on:
+## Platform Structure
 
-- source ingestion
+Lattice is organized in two phases.
+
+### Phase 1: Data Foundation
+
+Phase 1 builds the data engine of the platform.
+
+Its purpose is to automatically ingest heterogeneous sources and convert them into normalized, provenance-aware, reusable training data.
+
+Phase 1 includes:
+
+- source registry and source adapters
+- ingestion from APIs, files, web resources, and databases
 - schema normalization
-- provenance and license tracking
-- deduplication and quality filtering
-- compiled outputs for:
+- provenance, licensing, and dedup tracking
+- quality filtering and data cleaning
+- compiled dataset views for:
   - pretraining
   - QA
   - instruction tuning
   - knowledge records
 
-### Phase 2: Data Intelligence
+This is the part of the platform that is currently implemented in the repository.
 
-Phase 2 builds the intelligence layer on top of Phase 1.
+### Phase 2: Training and Optimization Layer
 
-Its job is not just to compile data, but to decide which data is more valuable and how it should be used for specific tasks and budgets.
+Phase 2 builds the model-training and optimization layer on top of Phase 1.
 
-Phase 2 focuses on:
+Its purpose is to let users move from data preparation to end-to-end model improvement workflows.
 
-- data valuation
-- task-conditioned scoring
-- mixture selection
-- feeding strategy and curriculum optimization
-- proxy experiments for downstream utility estimation
+Phase 2 is intended to support:
+
+- pretraining
+- continued pretraining
+- fine-tuning
+- post-training for safety and alignment
+- data valuation and data selection
+- mixture optimization and feeding strategy design
+- conversational and low-code workflow control
 
 In short:
 
-- Phase 1 asks: **How do we build high-quality scientific training data?**
-- Phase 2 asks: **Which data should we use, and how should we use it?**
+- Phase 1 answers: **How do we build high-quality training data?**
+- Phase 2 answers: **How do we use that data to train and optimize models more easily and more effectively?**
 
 ## Current Status
 
-The repository is currently implementing **Phase 1**.
+The repository is currently implementing **Phase 1** of the platform.
 
 What is already in place:
 
@@ -89,26 +106,19 @@ What is already in place:
 - compiled dataset views
 - a starter source registry
 - real-source demo fetchers
-- P0 materials adapters for:
-  - OQMD
-  - NOMAD
-  - Materials Project with API-key gating
+- open-source adapters for:
   - OpenAlex
   - Crossref
   - arXiv
   - PubChem
-  - Wikidata
+  - OQMD
+  - NOMAD
   - JARVIS
+  - Wikidata
+- Materials Project integration with API-key gating
 - tests and CI
 
-## Repository Structure
-
-- `src/lattice/`: core package
-- `configs/`: source registry and fetch configuration
-- `docs/`: architecture notes and research documents
-- `docs/research/`: proposal, survey, and planning notes
-- `examples/`: small sample inputs
-- `tests/`: unit and end-to-end tests
+So today, Lattice is already functioning as the **data foundation layer** of the future platform, but it is not yet the full training platform described above.
 
 ## Daily Updates
 
@@ -149,20 +159,30 @@ What is already in place:
 - Extended the compiler so `KnowledgeRecord` sources can also flow into QA, instruction, and knowledge views.
 - Marked PatentsView as an optional connector while the legacy API remains discontinued during ODP migration.
 
+## Repository Structure
+
+- `src/lattice/`: core package
+- `configs/`: source registry and fetch configuration
+- `docs/`: architecture notes and research documents
+- `docs/research/`: proposal, survey, and planning notes
+- `examples/`: small sample inputs
+- `tests/`: unit and end-to-end tests
+
 ## Roadmap
 
 Near-term priorities:
 
-- expand Phase 1 source coverage
+- expand open-source source coverage in Phase 1
 - improve source registry and license gating
 - build a stronger silver layer for cross-source alignment
 - release a larger materials-domain dataset
 
 Long-term priorities:
 
-- add value modeling
-- add mixture optimization
-- add feeding strategy optimization
+- connect Phase 1 outputs to model training workflows
+- support pretraining, continued pretraining, fine-tuning, and post-training
+- add data valuation and mixture optimization
+- add conversational and drag-and-drop workflow control
 
 ## Supporting Docs
 
