@@ -6,32 +6,37 @@
     <title>Lattice</title>
     <style>
       :root {
-        --bg: #f4ede4;
-        --paper: rgba(255, 251, 245, 0.86);
-        --paper-strong: rgba(255, 255, 255, 0.92);
-        --ink: #14202f;
-        --muted: #60707f;
-        --line: rgba(20, 32, 47, 0.1);
+        --bg: #f7f4ee;
+        --ink: #121a27;
+        --muted: #5d6875;
+        --line: rgba(18, 26, 39, 0.1);
+        --surface: rgba(255, 255, 255, 0.84);
+        --surface-strong: rgba(255, 255, 255, 0.94);
+        --surface-dark: #141d2d;
         --teal: #0f766e;
         --blue: #1d4ed8;
-        --amber: #b45309;
+        --copper: #b45309;
         --berry: #9f1239;
-        --shadow: 0 28px 80px rgba(20, 32, 47, 0.12);
+        --shadow: 0 28px 80px rgba(18, 26, 39, 0.12);
       }
 
       * {
         box-sizing: border-box;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         margin: 0;
         color: var(--ink);
         background:
-          radial-gradient(circle at 10% 0%, rgba(15, 118, 110, 0.18), transparent 28%),
-          radial-gradient(circle at 90% 16%, rgba(29, 78, 216, 0.12), transparent 22%),
-          radial-gradient(circle at 60% 100%, rgba(180, 83, 9, 0.12), transparent 28%),
-          linear-gradient(180deg, #fffdf8 0%, var(--bg) 100%);
-        font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+          radial-gradient(circle at 0% 0%, rgba(15, 118, 110, 0.16), transparent 24%),
+          radial-gradient(circle at 100% 12%, rgba(29, 78, 216, 0.13), transparent 20%),
+          radial-gradient(circle at 60% 100%, rgba(180, 83, 9, 0.1), transparent 28%),
+          linear-gradient(180deg, #fffdf9 0%, var(--bg) 100%);
+        font-family: "Avenir Next", "Inter", "Helvetica Neue", "Segoe UI", sans-serif;
       }
 
       a {
@@ -50,14 +55,25 @@
         justify-content: space-between;
         align-items: center;
         gap: 16px;
-        margin-bottom: 18px;
+        margin-bottom: 22px;
       }
 
       .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
         font-size: 14px;
         font-weight: 800;
         letter-spacing: 0.16em;
         text-transform: uppercase;
+      }
+
+      .brand-mark {
+        width: 12px;
+        height: 12px;
+        border-radius: 4px;
+        background: linear-gradient(135deg, var(--teal), var(--blue));
+        box-shadow: 0 0 0 6px rgba(15, 118, 110, 0.08);
       }
 
       .nav {
@@ -70,20 +86,20 @@
       .nav-link {
         padding: 10px 14px;
         border-radius: 999px;
-        background: rgba(20, 32, 47, 0.06);
+        background: rgba(18, 26, 39, 0.05);
         font-size: 13px;
         font-weight: 700;
       }
 
       .hero {
         display: grid;
-        grid-template-columns: 1.05fr 0.95fr;
+        grid-template-columns: 1.02fr 0.98fr;
         gap: 24px;
         align-items: stretch;
       }
 
       .panel {
-        background: var(--paper);
+        background: var(--surface);
         border: 1px solid var(--line);
         border-radius: 34px;
         box-shadow: var(--shadow);
@@ -97,6 +113,7 @@
       .eyebrow {
         display: inline-flex;
         align-items: center;
+        gap: 8px;
         padding: 8px 14px;
         border-radius: 999px;
         background: rgba(15, 118, 110, 0.1);
@@ -108,22 +125,23 @@
       }
 
       h1, h2, h3 {
-        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+        font-family: "Iowan Old Style", "Georgia", "Palatino Linotype", serif;
       }
 
       h1 {
         margin: 18px 0 16px;
-        font-size: clamp(52px, 7vw, 98px);
+        max-width: 10.5ch;
+        font-size: clamp(54px, 7vw, 100px);
         line-height: 0.9;
         letter-spacing: -0.06em;
       }
 
       .lead {
         margin: 0;
-        max-width: 44ch;
+        max-width: 45ch;
         color: var(--muted);
         font-size: 18px;
-        line-height: 1.72;
+        line-height: 1.75;
       }
 
       .lead strong {
@@ -140,7 +158,7 @@
       .tag {
         padding: 10px 14px;
         border-radius: 999px;
-        background: rgba(20, 32, 47, 0.06);
+        background: rgba(18, 26, 39, 0.06);
         font-size: 13px;
         font-weight: 700;
       }
@@ -156,7 +174,7 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 13px 18px;
+        padding: 14px 18px;
         border-radius: 18px;
         font-weight: 800;
         transition: transform 0.18s ease;
@@ -172,7 +190,7 @@
       }
 
       .button.secondary {
-        background: rgba(20, 32, 47, 0.06);
+        background: rgba(18, 26, 39, 0.06);
         color: var(--ink);
       }
 
@@ -180,19 +198,20 @@
         padding: 24px;
       }
 
-      .window {
+      .app {
         overflow: hidden;
-        border-radius: 28px;
-        background: var(--paper-strong);
-        border: 1px solid rgba(20, 32, 47, 0.08);
+        border-radius: 30px;
+        background: linear-gradient(180deg, #162135 0%, #0f1726 100%);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: #ecf2ff;
       }
 
-      .window-top {
+      .app-top {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 14px 18px;
-        border-bottom: 1px solid rgba(20, 32, 47, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       }
 
       .dots {
@@ -204,66 +223,65 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: rgba(20, 32, 47, 0.18);
+        background: rgba(255, 255, 255, 0.16);
       }
 
-      .window-title {
-        color: var(--muted);
+      .app-title {
+        color: rgba(255, 255, 255, 0.68);
         font-size: 12px;
         font-weight: 800;
         letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
-      .product-body {
+      .app-body {
         display: grid;
-        grid-template-columns: 0.9fr 1fr 0.9fr;
+        grid-template-columns: 0.95fr 1fr 0.92fr;
         gap: 14px;
         padding: 18px;
       }
 
-      .stack {
+      .lane {
         display: grid;
         gap: 12px;
       }
 
-      .stack h3 {
-        margin: 4px 0 2px;
-        color: var(--muted);
+      .lane-title {
+        color: rgba(255, 255, 255, 0.6);
         font-size: 12px;
         font-weight: 800;
         letter-spacing: 0.08em;
         text-transform: uppercase;
       }
 
-      .node {
-        padding: 14px 14px 13px;
+      .block {
+        padding: 14px;
         border-radius: 18px;
-        background: rgba(20, 32, 47, 0.05);
-        border: 1px solid rgba(20, 32, 47, 0.07);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.08);
       }
 
-      .node strong {
+      .block strong {
         display: block;
         font-size: 17px;
         letter-spacing: -0.03em;
       }
 
-      .node span {
+      .block span {
         display: block;
         margin-top: 6px;
-        color: var(--muted);
+        color: rgba(236, 242, 255, 0.68);
         font-size: 13px;
         line-height: 1.55;
       }
 
-      .node.teal { background: rgba(15, 118, 110, 0.07); border-color: rgba(15, 118, 110, 0.18); }
-      .node.blue { background: rgba(29, 78, 216, 0.07); border-color: rgba(29, 78, 216, 0.18); }
-      .node.amber { background: rgba(180, 83, 9, 0.08); border-color: rgba(180, 83, 9, 0.18); }
-      .node.berry { background: rgba(159, 18, 57, 0.08); border-color: rgba(159, 18, 57, 0.18); }
+      .block.teal { background: rgba(15, 118, 110, 0.14); border-color: rgba(15, 118, 110, 0.18); }
+      .block.blue { background: rgba(29, 78, 216, 0.14); border-color: rgba(29, 78, 216, 0.18); }
+      .block.copper { background: rgba(180, 83, 9, 0.14); border-color: rgba(180, 83, 9, 0.18); }
+      .block.berry { background: rgba(159, 18, 57, 0.14); border-color: rgba(159, 18, 57, 0.18); }
 
       .section {
-        margin-top: 28px;
+        margin-top: 30px;
       }
 
       .section-header {
@@ -278,7 +296,7 @@
 
       .section-subtitle {
         margin: 8px 0 0;
-        max-width: 62ch;
+        max-width: 64ch;
         color: var(--muted);
         line-height: 1.72;
       }
@@ -311,7 +329,7 @@
       }
 
       .badge.teal { background: rgba(15, 118, 110, 0.1); color: var(--teal); }
-      .badge.copper { background: rgba(180, 83, 9, 0.12); color: var(--amber); }
+      .badge.copper { background: rgba(180, 83, 9, 0.12); color: var(--copper); }
       .badge.blue { background: rgba(29, 78, 216, 0.1); color: var(--blue); }
       .badge.berry { background: rgba(159, 18, 57, 0.1); color: var(--berry); }
 
@@ -333,6 +351,22 @@
         gap: 18px;
       }
 
+      .proof-main {
+        padding: 24px;
+      }
+
+      .proof-main h3 {
+        margin: 12px 0 10px;
+        font-size: 30px;
+        letter-spacing: -0.03em;
+      }
+
+      .proof-main p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.72;
+      }
+
       .mini-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -343,7 +377,7 @@
         padding: 16px 18px;
         border-radius: 20px;
         background: rgba(255, 255, 255, 0.72);
-        border: 1px solid rgba(20, 32, 47, 0.08);
+        border: 1px solid rgba(18, 26, 39, 0.08);
       }
 
       .mini-label {
@@ -406,7 +440,7 @@
         .grid-3,
         .proof,
         .cta,
-        .product-body {
+        .app-body {
           grid-template-columns: 1fr;
         }
       }
@@ -420,6 +454,7 @@
         .hero-copy,
         .product,
         .card,
+        .proof-main,
         .cta {
           padding: 22px;
         }
@@ -454,9 +489,9 @@
       <section class="hero">
         <div class="panel hero-copy">
           <div class="eyebrow">Data-Centric Model Platform</div>
-          <h1>Build model workflows like product blocks.</h1>
+          <h1>Train and optimize models like product workflows.</h1>
           <p class="lead">
-            Lattice turns fragmented scientific sources into structured training data, then connects that data to
+            Lattice turns fragmented scientific sources into structured training data and connects that data to
             <strong>pretraining</strong>, <strong>continued pretraining</strong>, <strong>fine-tuning</strong>,
             and <strong>post-training</strong>.
           </p>
@@ -470,60 +505,58 @@
           </div>
           <div class="actions">
             <a class="button primary" href="docs/demo-showcase.html">Open current demo</a>
-            <a class="button secondary" href="README.md">Read README</a>
+            <a class="button secondary" href="README.md">Read docs</a>
           </div>
         </div>
 
         <div class="panel product">
-          <div class="window">
-            <div class="window-top">
+          <div class="app">
+            <div class="app-top">
               <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
-              <div class="window-title">Lattice Workflow Canvas</div>
+              <div class="app-title">Lattice Workflow Canvas</div>
             </div>
-            <div class="product-body">
-              <div class="stack">
-                <h3>Sources</h3>
-                <div class="node teal">
+            <div class="app-body">
+              <div class="lane">
+                <div class="lane-title">Sources</div>
+                <div class="block teal">
                   <strong>Papers</strong>
                   <span>OpenAlex, Crossref, arXiv</span>
                 </div>
-                <div class="node blue">
+                <div class="block blue">
                   <strong>Databases</strong>
                   <span>OQMD, NOMAD, JARVIS, PubChem</span>
                 </div>
-                <div class="node berry">
+                <div class="block berry">
                   <strong>Knowledge</strong>
                   <span>Wikidata, patents, domain archives</span>
                 </div>
               </div>
-
-              <div class="stack">
-                <h3>Platform</h3>
-                <div class="node amber">
+              <div class="lane">
+                <div class="lane-title">Platform Core</div>
+                <div class="block copper">
                   <strong>Collect</strong>
                   <span>registry, adapters, ingestion</span>
                 </div>
-                <div class="node amber">
+                <div class="block copper">
                   <strong>Compile</strong>
                   <span>schema, traceability, filtering, views</span>
                 </div>
-                <div class="node amber">
+                <div class="block copper">
                   <strong>Operate</strong>
                   <span>chat, drag-drop, reusable blocks</span>
                 </div>
               </div>
-
-              <div class="stack">
-                <h3>Training</h3>
-                <div class="node teal">
+              <div class="lane">
+                <div class="lane-title">Training</div>
+                <div class="block teal">
                   <strong>Pretrain</strong>
-                  <span>from-scratch model building</span>
+                  <span>from scratch</span>
                 </div>
-                <div class="node blue">
+                <div class="block blue">
                   <strong>Continue</strong>
                   <span>domain continued pretraining</span>
                 </div>
-                <div class="node berry">
+                <div class="block berry">
                   <strong>Fine-tune + Post-train</strong>
                   <span>task optimization, safety, alignment</span>
                 </div>
@@ -535,21 +568,21 @@
 
       <section class="section">
         <div class="section-header">
-          <h2 class="section-title">The platform covers four model stages</h2>
+          <h2 class="section-title">One platform, four training modes</h2>
           <p class="section-subtitle">
-            One platform should own the data layer and the model-improvement layer together.
+            The product should not stop at data curation. It should carry the same data foundation into every training stage.
           </p>
         </div>
         <div class="grid-4">
           <article class="panel card">
             <span class="badge teal">Pretrain</span>
             <h3>From scratch</h3>
-            <p>Build corpora and structured records for new model training.</p>
+            <p>Build corpora and structured records for fresh model training.</p>
           </article>
           <article class="panel card">
             <span class="badge copper">Continue</span>
-            <h3>Adapt existing models</h3>
-            <p>Continue training with scientific and domain-specific data.</p>
+            <h3>Adapt models</h3>
+            <p>Continue training a base model on new scientific or domain-specific knowledge.</p>
           </article>
           <article class="panel card">
             <span class="badge blue">Fine-tune</span>
@@ -559,33 +592,33 @@
           <article class="panel card">
             <span class="badge berry">Post-train</span>
             <h3>Align and safeguard</h3>
-            <p>Support alignment, preference, and safety optimization in one story.</p>
+            <p>Bring preference, safety, and alignment optimization into the same workflow layer.</p>
           </article>
         </div>
       </section>
 
       <section class="section">
         <div class="section-header">
-          <h2 class="section-title">The product surface is low-friction</h2>
+          <h2 class="section-title">The interface should feel simple</h2>
           <p class="section-subtitle">
-            Users should feel like they are composing workflows, not wiring infrastructure by hand.
+            Users should compose workflows like product blocks instead of stitching together expert-only scripts.
           </p>
         </div>
         <div class="grid-3">
           <article class="panel card">
             <span class="badge teal">Chat</span>
-            <h3>Describe the flow</h3>
-            <p>Specify sources, training goals, and data intent in natural language.</p>
+            <h3>Describe the workflow</h3>
+            <p>Specify sources, goals, and optimization intent in natural language.</p>
           </article>
           <article class="panel card">
             <span class="badge copper">Drag-drop</span>
             <h3>Compose visually</h3>
-            <p>Snap sources, transforms, and training stages into one executable chain.</p>
+            <p>Snap source blocks, transforms, and training stages into one executable chain.</p>
           </article>
           <article class="panel card">
             <span class="badge blue">Reusable blocks</span>
             <h3>Reuse instead of rewiring</h3>
-            <p>Turn complex flows into repeatable modules instead of one-off scripts.</p>
+            <p>Turn complex workflows into repeatable modules rather than one-off engineering.</p>
           </article>
         </div>
       </section>
@@ -598,11 +631,14 @@
           </p>
         </div>
         <div class="proof">
-          <div class="panel card">
-            <span class="badge teal">Proof A</span>
-            <h3>Real-source compilation</h3>
-            <p>A public-source batch from OpenAlex, arXiv, and PubChem is fetched and compiled into reusable training views.</p>
-          </div>
+          <article class="panel proof-main">
+            <span class="badge teal">Current proof</span>
+            <h3>Real-source + runtime demos</h3>
+            <p>
+              Lattice already fetches real public sources, compiles them into reusable training views, and runs the
+              same normalized data through local and Spark execution.
+            </p>
+          </article>
           <div class="mini-grid">
             <div class="mini">
               <div class="mini-label">Source demo</div>
@@ -632,9 +668,9 @@
         <div class="panel cta">
           <div>
             <h3>See the executable proof</h3>
-            <p>Open the demo showcase to inspect manifests, runtime outputs, and the current working artifacts.</p>
+            <p>Open the live demo showcase to inspect manifests, runtime outputs, and generated artifacts.</p>
           </div>
-          <a class="button primary" href="docs/demo-showcase.html">Open Demo Showcase</a>
+          <a class="button primary" href="docs/demo-showcase.html">Open demo showcase</a>
         </div>
       </section>
 
@@ -642,7 +678,7 @@
         <div class="section-header">
           <h2 class="section-title">Roadmap</h2>
           <p class="section-subtitle">
-            Phase 1 builds the data foundation. Phase 2 turns that foundation into a full training and optimization product.
+            Phase 1 builds the data foundation. Phase 2 turns that foundation into a full training and optimization layer.
           </p>
         </div>
         <div class="panel roadmap">
