@@ -72,3 +72,63 @@ In short:
 
 - Phase 1 answers: **How do we build high-quality scientific training data?**
 - Phase 2 answers: **Which data should we use, and how should we use it?**
+
+## Daily Updates
+
+### 2026-04-13
+
+- Created the standalone `lattice` repository and pushed the first public version.
+- Implemented the first runnable Phase 1 compiler:
+  - text / HTML / JSON / JSONL / optional PDF ingestion
+  - schema normalization
+  - provenance and dedup metadata
+  - quality filtering
+  - compiled dataset views
+- Added the first materials example dataset and end-to-end tests.
+- Added open-source scaffolding:
+  - MIT license
+  - contributing guide
+  - changelog
+  - CI workflow
+
+### 2026-04-14
+
+- Added a real-source demo fetcher for OpenAlex, arXiv, and PubChem.
+- Added a starter source registry and storage architecture document.
+- Added P0 materials source adapters for OQMD, NOMAD, and Materials Project.
+- Verified:
+  - OQMD and NOMAD can be fetched into raw records
+  - fetched records can be compiled into Lattice dataset views
+  - Materials Project skips safely when no API key is configured
+- Reorganized the repository structure and moved planning documents into `docs/research/`.
+
+## Phase 1 / Phase 2 Diagram
+
+```mermaid
+flowchart LR
+    G["Overall Goal<br/>Build a data-centric infrastructure for science and materials foundation models"]
+
+    subgraph P1["Phase 1: Data Compiler"]
+        S1["Source Registry<br/>OpenAlex / arXiv / OQMD / NOMAD / MP / PubChem / Patents"]
+        S2["Ingestion<br/>API fetch / dumps / web / files"]
+        S3["Normalization<br/>Document / StructuredRecord / KnowledgeRecord / InstructionTrace"]
+        S4["Data Quality<br/>provenance / license / dedup / filtering"]
+        S5["Compiled Views<br/>pretraining / QA / instruction / knowledge"]
+        S6["Release Layer<br/>manifests / dataset cards / reproducible outputs"]
+        S1 --> S2 --> S3 --> S4 --> S5 --> S6
+    end
+
+    subgraph P2["Phase 2: Data Intelligence"]
+        T1["Value Modeling<br/>quality / novelty / affinity / coverage / utility"]
+        T2["Proxy Experiments<br/>small-budget utility estimation"]
+        T3["Mixture Selection<br/>which data to use"]
+        T4["Feeding Strategy<br/>curriculum / schedule / allocation"]
+        T5["Optimized Training Data<br/>task-conditioned data plan"]
+        T1 --> T2 --> T3 --> T4 --> T5
+    end
+
+    G --> P1
+    P1 --> P2
+    S5 -. feeds .-> T1
+    S6 -. release and evaluation signals .-> T2
+```
