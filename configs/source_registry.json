@@ -30,7 +30,8 @@
       "access_mode": "API",
       "schema_targets": ["StructuredRecord", "KnowledgeRecord"],
       "license_status": "official API terms",
-      "recommended_storage_tier": "raw/api/materials_project"
+      "recommended_storage_tier": "raw/api/materials_project",
+      "auth_env": ["MP_API_KEY", "MATERIALS_PROJECT_API_KEY"]
     },
     {
       "name": "oqmd",

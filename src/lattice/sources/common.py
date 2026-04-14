@@ -23,8 +23,11 @@ def _ssl_context() -> ssl.SSLContext:
         return ssl.create_default_context()
 
 
-def http_get_json(url: str) -> Any:
-    request = urllib.request.Request(url, headers={"User-Agent": DEFAULT_USER_AGENT})
+def http_get_json(url: str, headers: dict[str, str] | None = None) -> Any:
+    request_headers = {"User-Agent": DEFAULT_USER_AGENT}
+    if headers:
+        request_headers.update(headers)
+    request = urllib.request.Request(url, headers=request_headers)
     with urllib.request.urlopen(request, timeout=30, context=_ssl_context()) as response:
         return json.load(response)
 

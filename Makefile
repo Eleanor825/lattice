@@ -1,4 +1,4 @@
-.PHONY: test compile-example demo stats clean
+.PHONY: test compile-example demo fetch-p0 stats clean
 
 test:
 	PYTHONPATH=src python3 -m unittest discover -s tests -v
@@ -19,6 +19,18 @@ demo:
 		--query "solid state battery electrolyte" \
 		--compound "lithium iron phosphate" \
 		--compound "lithium cobalt oxide"
+
+fetch-p0:
+	PYTHONPATH=src python3 -m lattice fetch-sources \
+		--output data/p0_materials/li_o \
+		--registry configs/source_registry.json \
+		--domain materials \
+		--source oqmd \
+		--source nomad \
+		--source materials_project \
+		--element Li \
+		--element O \
+		--limit 2
 
 stats:
 	PYTHONPATH=src python3 -m lattice stats --path outputs/materials

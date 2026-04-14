@@ -15,6 +15,9 @@ It now also includes a **real-source demo fetcher** that can pull a small public
 - OpenAlex
 - arXiv
 - PubChem
+- OQMD
+- NOMAD
+- Materials Project (when `MP_API_KEY` is set)
 
 ## Project Layout
 
@@ -85,6 +88,23 @@ PYTHONPATH=src python3 -m lattice demo \
   --compound "lithium iron phosphate" \
   --compound "lithium cobalt oxide"
 ```
+
+Fetch selected registry-backed sources:
+
+```bash
+PYTHONPATH=src python3 -m lattice fetch-sources \
+  --output data/p0_materials/li_o \
+  --registry configs/source_registry.json \
+  --domain materials \
+  --source oqmd \
+  --source nomad \
+  --source materials_project \
+  --element Li \
+  --element O \
+  --limit 2
+```
+
+`Materials Project` requires `MP_API_KEY` or `MATERIALS_PROJECT_API_KEY`. If it is missing, the fetcher skips that source and records a warning instead of failing.
 
 ## Output Views
 

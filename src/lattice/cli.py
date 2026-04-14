@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 from lattice.compiler import CompilerConfig, compile_dataset
-from lattice.sources import DemoFetchConfig, run_demo_fetch
+from lattice.sources import DemoFetchConfig, SourceFetchConfig, run_demo_fetch, run_source_fetch
 from lattice.utils import read_json
 
 
@@ -48,6 +48,37 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Compound name for PubChem lookup. Can be repeated.",
     )
 
+    fetch_sources_parser = subparsers.add_parser(
+        "fetch-sources", help="Fetch selected real sources from the source registry."
+    )
+    fetch_sources_parser.add_argument("--output", required=True, help="Directory for fetched raw source files.")
+    fetch_sources_parser.add_argument("--domain", default="materials", help="Target domain label.")
+    fetch_sources_parser.add_argument(
+        "--registry",
+        default="configs/source_registry.json",
+        help="Path to the source registry JSON file.",
+    )
+    fetch_sources_parser.add_argument(
+        "--source",
+        action="append",
+        required=True,
+        help="Source name from the registry. Can be repeated.",
+    )
+    fetch_sources_parser.add_argument("--query", default="solid state battery electrolyte", help="Topic query.")
+    fetch_sources_parser.add_argument(
+        "--element",
+        action="append",
+        default=[],
+        help="Element symbol for materials queries. Can be repeated.",
+    )
+    fetch_sources_parser.add_argument(
+        "--compound",
+        action="append",
+        default=[],
+        help="Compound name for PubChem lookup. Can be repeated.",
+    )
+    fetch_sources_parser.add_argument("--limit", type=int, default=3, help="Maximum rows per source.")
+
     stats_parser = subparsers.add_parser("stats", help="Print summary stats from a compiled output.")
     stats_parser.add_argument("--path", required=True, help="Compiled output directory or manifest path.")
     return parser
@@ -72,6 +103,12 @@ def _compounds_or_default(compounds: list[str]) -> list[str]:
     return ["lithium iron phosphate", "lithium cobalt oxide"]
 
 
+def _elements_or_default(elements: list[str]) -> list[str]:
+    if elements:
+        return elements
+    return ["Li", "O"]
+
+
 def _handle_fetch_demo(args: argparse.Namespace) -> int:
     config = DemoFetchConfig(
         output_dir=args.output,
@@ -82,6 +119,22 @@ def _handle_fetch_demo(args: argparse.Namespace) -> int:
         compounds=_compounds_or_default(args.compound),
     )
     manifest = run_demo_fetch(config)
+    print(json.dumps(manifest, indent=2, ensure_ascii=False))
+    return 0
+
+
+def _handle_fetch_sources(args: argparse.Namespace) -> int:
+    config = SourceFetchConfig(
+        output_dir=args.output,
+        domain=args.domain,
+        registry_path=args.registry,
+        sources=args.source,
+        query=args.query,
+        elements=_elements_or_default(args.element),
+        compounds=_compounds_or_default(args.compound),
+        limit=args.limit,
+    )
+    manifest = run_source_fetch(config)
     print(json.dumps(manifest, indent=2, ensure_ascii=False))
     return 0
 
@@ -127,6 +180,8 @@ def main(argv: list[str] | None = None) -> int:
         return _handle_compile(args)
     if args.command == "fetch-demo":
         return _handle_fetch_demo(args)
+    if args.command == "fetch-sources":
+        return _handle_fetch_sources(args)
     if args.command == "demo":
         return _handle_demo(args)
     if args.command == "stats":
