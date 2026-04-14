@@ -136,6 +136,23 @@ What is already in place:
 
 So today, Lattice is already functioning as the **data foundation layer** of the future platform, but it is not yet the full training platform described above.
 
+## Capability Status
+
+| Capability | Status |
+|---|---|
+| Multi-source ingestion | ✅ Implemented |
+| Provenance / license / dedup tracking | ✅ Implemented |
+| Dataset view compilation | ✅ Implemented |
+| Local execution | ✅ Implemented |
+| Spark execution | ✅ Implemented |
+| Flink execution | ◐ Code path implemented, runtime not fully working locally yet |
+| Pretraining workflow | ◐ Platform target, not fully implemented yet |
+| Continued pretraining workflow | ◐ Platform target, not fully implemented yet |
+| Fine-tuning workflow | ◐ Platform target, not fully implemented yet |
+| Post-training workflow | ◐ Platform target, not fully implemented yet |
+| Conversational workflow | ◐ Platform target, not fully implemented yet |
+| Drag-and-drop workflow | ◐ Platform target, not fully implemented yet |
+
 ## Data Sources and Types
 
 ### Source Coverage
@@ -162,6 +179,30 @@ So today, Lattice is already functioning as the **data foundation layer** of the
 | `StructuredRecord` | Entity-centered structured properties | OQMD, NOMAD, JARVIS, PubChem |
 | `KnowledgeRecord` | Subject-predicate-object knowledge units | Wikidata, Materials Project, PubChem |
 | `InstructionTrace` | Instruction-following or workflow examples | future task recipes and generated workflows |
+
+### Source Coverage Status
+
+| Source | Priority | Status | Access | Schema |
+|---|---|---|---|---|
+| OpenAlex | P0 | ✅ Implemented | REST API | `Document` |
+| Crossref | P0 | ✅ Implemented | REST API | `Document` |
+| arXiv | P0 | ✅ Implemented | API + bulk | `Document` |
+| Materials Project | P0 | ◐ Implemented, API-key gated | API | `StructuredRecord`, `KnowledgeRecord` |
+| OQMD | P0 | ✅ Implemented | API / download | `StructuredRecord` |
+| NOMAD | P0 | ✅ Implemented | API | `StructuredRecord`, `Document` |
+| JARVIS | P0 | ✅ Implemented | OPTIMADE / tools | `StructuredRecord`, `Document` |
+| Wikidata | P0 | ✅ Implemented | MediaWiki API | `KnowledgeRecord` |
+| PubChem | P0 | ✅ Implemented | PUG REST | `StructuredRecord`, `KnowledgeRecord` |
+| PatentsView | P0 | ◐ Optional / migration blocker | ODP migration | `Document`, `StructuredRecord` |
+| COD | P1 | ◐ Planned | search / dumps | `StructuredRecord` |
+
+### Engine Status
+
+| Engine | Local Available | Verified | Status | Notes |
+|---|---:|---:|---|---|
+| Local | ✅ | ✅ | Ready | Default development path |
+| Spark | ✅ | ✅ | Ready | Local Spark mode verified |
+| Flink | ◐ | ❌ | Partial | Code path exists, current local runtime still blocked |
 
 ## Platform Comparison
 

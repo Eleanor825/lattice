@@ -137,6 +137,23 @@ Phase 2 计划支持：
 
 所以目前 Lattice 已经具备未来平台的 **数据基础层**，但还不是完整的训练平台。
 
+## 功能状态表
+
+| 功能 | 状态 |
+|---|---|
+| 多源数据接入 | ✅ 已实现 |
+| provenance / license / dedup 跟踪 | ✅ 已实现 |
+| 训练视图编译 | ✅ 已实现 |
+| 本地执行 | ✅ 已实现 |
+| Spark 执行 | ✅ 已实现 |
+| Flink 执行 | ◐ 已有代码路径，但本机 runtime 还未完全跑通 |
+| Pretraining 工作流 | ◐ 平台目标，尚未完整实现 |
+| Continued pretraining 工作流 | ◐ 平台目标，尚未完整实现 |
+| Fine-tuning 工作流 | ◐ 平台目标，尚未完整实现 |
+| Post-training 工作流 | ◐ 平台目标，尚未完整实现 |
+| 对话式工作流 | ◐ 平台目标，尚未完整实现 |
+| 拖拽式工作流 | ◐ 平台目标，尚未完整实现 |
+
 ## 数据来源与数据类型
 
 ### 数据来源表
@@ -163,6 +180,30 @@ Phase 2 计划支持：
 | `StructuredRecord` | 以实体为中心的结构化属性 | OQMD, NOMAD, JARVIS, PubChem |
 | `KnowledgeRecord` | subject-predicate-object 形式的知识单元 | Wikidata, Materials Project, PubChem |
 | `InstructionTrace` | 指令式或工作流式样本 | 后续生成的 task recipe 和 workflow 示例 |
+
+### Source 覆盖状态表
+
+| Source | 优先级 | 状态 | 接入方式 | Schema |
+|---|---|---|---|---|
+| OpenAlex | P0 | ✅ 已实现 | REST API | `Document` |
+| Crossref | P0 | ✅ 已实现 | REST API | `Document` |
+| arXiv | P0 | ✅ 已实现 | API + bulk | `Document` |
+| Materials Project | P0 | ◐ 已实现，但需要 API key | API | `StructuredRecord`, `KnowledgeRecord` |
+| OQMD | P0 | ✅ 已实现 | API / download | `StructuredRecord` |
+| NOMAD | P0 | ✅ 已实现 | API | `StructuredRecord`, `Document` |
+| JARVIS | P0 | ✅ 已实现 | OPTIMADE / tools | `StructuredRecord`, `Document` |
+| Wikidata | P0 | ✅ 已实现 | MediaWiki API | `KnowledgeRecord` |
+| PubChem | P0 | ✅ 已实现 | PUG REST | `StructuredRecord`, `KnowledgeRecord` |
+| PatentsView | P0 | ◐ Optional / 迁移阻塞中 | ODP migration | `Document`, `StructuredRecord` |
+| COD | P1 | ◐ 计划中 | search / dumps | `StructuredRecord` |
+
+### 执行引擎状态表
+
+| 引擎 | 本地可用 | 已验证 | 状态 | 说明 |
+|---|---:|---:|---|---|
+| Local | ✅ | ✅ | Ready | 默认开发路径 |
+| Spark | ✅ | ✅ | Ready | Spark local mode 已验证 |
+| Flink | ◐ | ❌ | Partial | 已有代码路径，但当前本地 runtime 仍有阻塞 |
 
 ## 平台对比
 
