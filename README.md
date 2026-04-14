@@ -136,6 +136,33 @@ What is already in place:
 
 So today, Lattice is already functioning as the **data foundation layer** of the future platform, but it is not yet the full training platform described above.
 
+## Data Sources and Types
+
+### Source Coverage
+
+| Source | Category | Access | Main Use | Schema Targets |
+|---|---|---|---|---|
+| OpenAlex | Scholarly metadata | REST API | work discovery, provenance, metadata enrichment | `Document` |
+| Crossref | Scholarly metadata | REST API | DOI metadata, metadata enrichment | `Document` |
+| arXiv | Preprints / papers | API + bulk | abstracts and paper text | `Document` |
+| Materials Project | Structured materials DB | API | material summaries and properties | `StructuredRecord`, `KnowledgeRecord` |
+| OQMD | Structured materials DB | API / download | structure and DFT properties | `StructuredRecord` |
+| NOMAD | Materials repository | API | repository entries and materials metadata | `StructuredRecord`, `Document` |
+| JARVIS | Materials repository | OPTIMADE / tools | materials structure and property records | `StructuredRecord`, `Document` |
+| PubChem | Chemistry database | PUG REST | compound properties and identifiers | `StructuredRecord`, `KnowledgeRecord` |
+| Wikidata | Open knowledge graph | MediaWiki API | entity descriptions and linked knowledge | `KnowledgeRecord` |
+| PatentsView | Patents | ODP migration | patent metadata and technical prior art | `Document`, `StructuredRecord` |
+| COD | Crystal structure DB | search / dumps | crystal structure coverage | `StructuredRecord` |
+
+### Data Types
+
+| Type | Meaning | Example Sources |
+|---|---|---|
+| `Document` | Long-form text for reading or training | arXiv, OpenAlex, Crossref |
+| `StructuredRecord` | Entity-centered structured properties | OQMD, NOMAD, JARVIS, PubChem |
+| `KnowledgeRecord` | Subject-predicate-object knowledge units | Wikidata, Materials Project, PubChem |
+| `InstructionTrace` | Instruction-following or workflow examples | future task recipes and generated workflows |
+
 ## Platform Comparison
 
 The table below focuses on the capability combination that matters most for Lattice.
@@ -280,5 +307,6 @@ Long-term priorities:
 - [Storage Architecture](docs/storage_architecture.md)
 - [Engine Runtime Notes](docs/engines.md)
 - [Demo Summary](docs/demo.md)
+- [Source Catalog](docs/source-catalog.md)
 - [Platform Comparison](docs/platform-comparison.md)
 - [Research Notes Index](docs/research/README.md)

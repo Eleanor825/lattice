@@ -137,6 +137,33 @@ Phase 2 计划支持：
 
 所以目前 Lattice 已经具备未来平台的 **数据基础层**，但还不是完整的训练平台。
 
+## 数据来源与数据类型
+
+### 数据来源表
+
+| 来源 | 类别 | 接入方式 | 主要用途 | 对应 Schema |
+|---|---|---|---|---|
+| OpenAlex | 学术元数据 | REST API | 论文发现、provenance、元数据补全 | `Document` |
+| Crossref | 学术元数据 | REST API | DOI 元数据、元数据补全 | `Document` |
+| arXiv | 预印本 / 论文 | API + bulk | 摘要与论文文本 | `Document` |
+| Materials Project | 材料结构化数据库 | API | 材料摘要与性质 | `StructuredRecord`, `KnowledgeRecord` |
+| OQMD | 材料结构化数据库 | API / download | 结构与 DFT 性质 | `StructuredRecord` |
+| NOMAD | 材料数据仓库 | API | repository entry 与材料元数据 | `StructuredRecord`, `Document` |
+| JARVIS | 材料数据仓库 | OPTIMADE / tools | 材料结构与性质记录 | `StructuredRecord`, `Document` |
+| PubChem | 化学数据库 | PUG REST | 化合物性质与标识符 | `StructuredRecord`, `KnowledgeRecord` |
+| Wikidata | 开放知识图谱 | MediaWiki API | 实体描述与链接知识 | `KnowledgeRecord` |
+| PatentsView | 专利 | ODP 迁移中 | 专利元数据与技术 prior art | `Document`, `StructuredRecord` |
+| COD | 晶体结构数据库 | search / dumps | 晶体结构覆盖 | `StructuredRecord` |
+
+### 数据类型分类
+
+| 类型 | 含义 | 典型来源 |
+|---|---|---|
+| `Document` | 长文本，可直接用于阅读或训练 | arXiv, OpenAlex, Crossref |
+| `StructuredRecord` | 以实体为中心的结构化属性 | OQMD, NOMAD, JARVIS, PubChem |
+| `KnowledgeRecord` | subject-predicate-object 形式的知识单元 | Wikidata, Materials Project, PubChem |
+| `InstructionTrace` | 指令式或工作流式样本 | 后续生成的 task recipe 和 workflow 示例 |
+
 ## 平台对比
 
 下面这张表集中比较对 Lattice 最关键的能力组合。
@@ -285,5 +312,6 @@ Lattice 想做、而大多数现有平台没有完整组合在一起的能力包
 - [Storage Architecture](docs/storage_architecture.md)
 - [Engine Runtime Notes](docs/engines.md)
 - [Demo Summary](docs/demo.md)
+- [Source Catalog](docs/source-catalog.md)
 - [Platform Comparison](docs/platform-comparison.md)
 - [Research Notes Index](docs/research/README.md)
