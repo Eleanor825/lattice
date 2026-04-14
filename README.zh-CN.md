@@ -5,6 +5,15 @@
   <a href="./README.zh-CN.md">
     <img alt="中文" src="https://img.shields.io/badge/中文-111827?style=for-the-badge">
   </a>
+  <a href="#demo">
+    <img alt="Demo" src="https://img.shields.io/badge/Demo-0f766e?style=for-the-badge">
+  </a>
+  <a href="#docs">
+    <img alt="Docs" src="https://img.shields.io/badge/Docs-7c3aed?style=for-the-badge">
+  </a>
+  <a href="#roadmap">
+    <img alt="Roadmap" src="https://img.shields.io/badge/Roadmap-b45309?style=for-the-badge">
+  </a>
 </div>
 
 # Lattice
@@ -158,6 +167,8 @@ Phase 2 计划支持：
 - 整理了 repo 结构，并把研究文档移到 `docs/research/`。
 - 加入了 Phase 1 / Phase 2 路线图。
 
+<a id="demo"></a>
+
 ## 小型展示
 
 ### Demo A：真实数据源编译 demo
@@ -220,6 +231,8 @@ Phase 2 计划支持：
 - `examples/`: 小样例输入
 - `tests/`: 单元测试和端到端测试
 
+<a id="roadmap"></a>
+
 ## 路线图
 
 近期重点：
@@ -236,6 +249,8 @@ Phase 2 计划支持：
 - 支持 pretraining、continued pretraining、fine-tuning 和 post-training
 - 增加数据价值建模与 mixture 优化
 - 增加对话式和拖拽式工作流控制
+
+<a id="docs"></a>
 
 ## 补充文档
 

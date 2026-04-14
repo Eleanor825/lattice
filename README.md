@@ -5,6 +5,15 @@
   <a href="./README.zh-CN.md">
     <img alt="中文" src="https://img.shields.io/badge/中文-2563eb?style=for-the-badge">
   </a>
+  <a href="#demo">
+    <img alt="Demo" src="https://img.shields.io/badge/Demo-0f766e?style=for-the-badge">
+  </a>
+  <a href="#docs">
+    <img alt="Docs" src="https://img.shields.io/badge/Docs-7c3aed?style=for-the-badge">
+  </a>
+  <a href="#roadmap">
+    <img alt="Roadmap" src="https://img.shields.io/badge/Roadmap-b45309?style=for-the-badge">
+  </a>
 </div>
 
 # Lattice
@@ -153,6 +162,8 @@ So today, Lattice is already functioning as the **data foundation layer** of the
 - Reorganized the repository structure and moved planning documents into `docs/research/`.
 - Added the Phase 1 / Phase 2 roadmap figure.
 
+<a id="demo"></a>
+
 ## Small Demo
 
 ### Demo A: Real-source Data Compilation
@@ -215,6 +226,8 @@ Artifacts:
 - `examples/`: small sample inputs
 - `tests/`: unit and end-to-end tests
 
+<a id="roadmap"></a>
+
 ## Roadmap
 
 Near-term priorities:
@@ -231,6 +244,8 @@ Long-term priorities:
 - support pretraining, continued pretraining, fine-tuning, and post-training
 - add data valuation and mixture optimization
 - add conversational and drag-and-drop workflow control
+
+<a id="docs"></a>
 
 ## Supporting Docs
 
