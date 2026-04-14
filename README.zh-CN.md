@@ -147,14 +147,14 @@ Phase 2 计划支持：
 - `◐` = 部分支持
 - `❌` = 未明显支持
 
-| 平台 | 开源 | 科学/材料垂域聚焦 | 多源数据编译 | provenance / license / dedup 作为核心 | 统一覆盖 pretraining + continued pretraining + fine-tuning + post-training 的平台叙事 | 本地执行 | Spark | Flink | 对话式 / 拖拽式 |
+| 平台 | 开源 | 科学/材料 | 数据编译 | 来源追踪 | 预训练 | 继续训练 | 微调 | 后训练 | 本地 | Spark | Flink | 对话/拖拽 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| **Lattice** | ✅ | ✅ | ✅ | ✅ | ◐ | ✅ | ✅ | ◐ | ❌ |
-| NVIDIA NeMo Curator | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ◐ | ❌ | ❌ |
-| Databricks Mosaic AI | ❌ | ❌ | ◐ | ◐ | ✅ | ❌ | ✅ | ❌ | ◐ |
-| H2O LLM Studio / DataStudio | ❌ | ❌ | ◐ | ◐ | ◐ | ◐ | ❌ | ❌ | ✅ |
-| Sparkflows | ❌ | ❌ | ◐ | ❌ | ◐ | ◐ | ✅ | ❌ | ✅ |
-| Kubeflow | ✅ | ❌ | ❌ | ❌ | ◐ | ✅ | ❌ | ❌ | ❌ |
+| **Lattice** | ✅ | ✅ | ✅ | ✅ | ◐ | ◐ | ◐ | ◐ | ✅ | ✅ | ◐ | ❌ |
+| NVIDIA NeMo Curator | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ | ◐ | ❌ | ❌ |
+| Databricks Mosaic AI | ❌ | ❌ | ◐ | ◐ | ✅ | ✅ | ✅ | ◐ | ❌ | ✅ | ❌ | ◐ |
+| H2O LLM Studio / DataStudio | ❌ | ❌ | ◐ | ◐ | ❌ | ◐ | ✅ | ◐ | ◐ | ❌ | ❌ | ✅ |
+| Sparkflows | ❌ | ❌ | ◐ | ❌ | ❌ | ◐ | ✅ | ❌ | ◐ | ✅ | ❌ | ✅ |
+| Kubeflow | ✅ | ❌ | ❌ | ❌ | ◐ | ◐ | ✅ | ◐ | ✅ | ❌ | ❌ | ❌ |
 
 Lattice 想做、而大多数现有平台没有完整组合在一起的能力包括：
 
