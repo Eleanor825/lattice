@@ -5,6 +5,7 @@ import ssl
 import time
 import urllib.parse
 import urllib.request
+from urllib.error import HTTPError, URLError
 from pathlib import Path
 from typing import Any
 
@@ -28,13 +29,13 @@ def http_get_json(url: str, headers: dict[str, str] | None = None) -> Any:
     if headers:
         request_headers.update(headers)
     request = urllib.request.Request(url, headers=request_headers)
-    with urllib.request.urlopen(request, timeout=30, context=_ssl_context()) as response:
+    with _open_with_retries(request) as response:
         return json.load(response)
 
 
 def http_get_text(url: str) -> str:
     request = urllib.request.Request(url, headers={"User-Agent": DEFAULT_USER_AGENT})
-    with urllib.request.urlopen(request, timeout=30, context=_ssl_context()) as response:
+    with _open_with_retries(request) as response:
         return response.read().decode("utf-8")
 
 
@@ -62,3 +63,22 @@ def write_source_manifest(base_output: str | Path, payload: dict[str, Any]) -> P
     path = root / "fetch_manifest.json"
     write_json(path, payload)
     return path
+
+
+def _open_with_retries(request: urllib.request.Request, *, timeout: int = 45, retries: int = 3):
+    last_error: Exception | None = None
+    for attempt in range(retries):
+        try:
+            return urllib.request.urlopen(request, timeout=timeout, context=_ssl_context())
+        except HTTPError as exc:
+            if 400 <= exc.code < 500 and exc.code not in {408, 429}:
+                raise
+            last_error = exc
+        except (TimeoutError, URLError) as exc:
+            last_error = exc
+
+        if attempt < retries - 1:
+            time.sleep(1.2 * (attempt + 1))
+
+    assert last_error is not None
+    raise last_error

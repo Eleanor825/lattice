@@ -1,4 +1,4 @@
-.PHONY: test compile-example demo fetch-p0 engine-check engine-local engine-spark engine-flink stats clean
+.PHONY: test compile-example demo fetch-p0 phase1-release engine-check engine-local engine-spark engine-flink stats clean
 
 test:
 	PYTHONPATH=src python3 -m unittest discover -s tests -v
@@ -30,6 +30,17 @@ fetch-p0:
 		--source materials_project \
 		--element Li \
 		--element O \
+		--limit 2
+
+phase1-release:
+	PYTHONPATH=src python3 -m lattice phase1-run \
+		--data-root ~/lattice-data \
+		--registry configs/source_registry.json \
+		--domain materials \
+		--release-name lattice-materials-demo \
+		--query "solid state battery electrolyte" \
+		--compound "lithium iron phosphate" \
+		--compound "lithium cobalt oxide" \
 		--limit 2
 
 engine-check:

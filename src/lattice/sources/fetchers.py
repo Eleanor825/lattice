@@ -18,6 +18,20 @@ from lattice.sources.registry import registry_source_map
 from lattice.sources.wikidata import fetch_wikidata_knowledge
 
 
+SUPPORTED_SOURCES = {
+    "openalex",
+    "crossref",
+    "arxiv",
+    "wikidata",
+    "jarvis",
+    "pubchem",
+    "oqmd",
+    "nomad",
+    "materials_project",
+    "patentsview",
+}
+
+
 @dataclass(slots=True)
 class SourceFetchConfig:
     output_dir: str
@@ -86,3 +100,16 @@ def run_source_fetch(config: SourceFetchConfig) -> dict[str, Any]:
     }
     write_source_manifest(output_dir, manifest)
     return manifest
+
+
+def implemented_sources(registry_path: str | Path, *, include_optional: bool = False) -> list[str]:
+    registry = registry_source_map(registry_path)
+    names = []
+    for name, payload in registry.items():
+        if name not in SUPPORTED_SOURCES:
+            continue
+        priority = str(payload.get("priority", ""))
+        if not include_optional and "optional" in priority.lower():
+            continue
+        names.append(name)
+    return names

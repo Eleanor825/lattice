@@ -8,6 +8,7 @@ from lattice.compiler import CompilerConfig, compile_dataset
 from lattice.engines import EngineConfig, engine_check, run_engine_compile
 from lattice.sources import DemoFetchConfig, SourceFetchConfig, run_demo_fetch, run_source_fetch
 from lattice.utils import read_json
+from lattice.workflows import Phase1Config, run_phase1_pipeline
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -94,6 +95,47 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     fetch_sources_parser.add_argument("--limit", type=int, default=3, help="Maximum rows per source.")
 
+    phase1_parser = subparsers.add_parser(
+        "phase1-run", help="Run an end-to-end Phase 1 pipeline into raw / bronze / gold / manifests."
+    )
+    phase1_parser.add_argument(
+        "--data-root",
+        required=True,
+        help="Root directory for Phase 1 outputs. Example: ~/lattice-data",
+    )
+    phase1_parser.add_argument(
+        "--registry",
+        default="configs/source_registry.json",
+        help="Path to the source registry JSON file.",
+    )
+    phase1_parser.add_argument("--domain", default="materials", help="Target domain label.")
+    phase1_parser.add_argument("--release-name", required=True, help="Release identifier.")
+    phase1_parser.add_argument("--query", default="solid state battery electrolyte", help="Topic query.")
+    phase1_parser.add_argument(
+        "--element",
+        action="append",
+        default=[],
+        help="Element symbol for materials queries. Can be repeated.",
+    )
+    phase1_parser.add_argument(
+        "--compound",
+        action="append",
+        default=[],
+        help="Compound name for chemistry lookups. Can be repeated.",
+    )
+    phase1_parser.add_argument(
+        "--source",
+        action="append",
+        default=[],
+        help="Source name from the registry. When omitted, fetch all implemented open sources.",
+    )
+    phase1_parser.add_argument("--limit", type=int, default=3, help="Maximum rows per source.")
+    phase1_parser.add_argument(
+        "--include-optional-sources",
+        action="store_true",
+        help="Also include optional sources when selecting from the registry automatically.",
+    )
+
     stats_parser = subparsers.add_parser("stats", help="Print summary stats from a compiled output.")
     stats_parser.add_argument("--path", required=True, help="Compiled output directory or manifest path.")
     return parser
@@ -174,6 +216,24 @@ def _handle_fetch_sources(args: argparse.Namespace) -> int:
     return 0
 
 
+def _handle_phase1_run(args: argparse.Namespace) -> int:
+    config = Phase1Config(
+        data_root=args.data_root,
+        registry_path=args.registry,
+        domain=args.domain,
+        release_name=args.release_name,
+        query=args.query,
+        elements=_elements_or_default(args.element),
+        compounds=_compounds_or_default(args.compound),
+        sources=args.source,
+        limit=args.limit,
+        include_optional_sources=args.include_optional_sources,
+    )
+    manifest = run_phase1_pipeline(config)
+    print(json.dumps(manifest, indent=2, ensure_ascii=False))
+    return 0
+
+
 def _handle_demo(args: argparse.Namespace) -> int:
     fetch_config = DemoFetchConfig(
         output_dir=args.raw_output,
@@ -221,6 +281,8 @@ def main(argv: list[str] | None = None) -> int:
         return _handle_fetch_demo(args)
     if args.command == "fetch-sources":
         return _handle_fetch_sources(args)
+    if args.command == "phase1-run":
+        return _handle_phase1_run(args)
     if args.command == "demo":
         return _handle_demo(args)
     if args.command == "stats":
