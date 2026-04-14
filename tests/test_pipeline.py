@@ -8,6 +8,8 @@ import tempfile
 from pathlib import Path
 import unittest
 
+from lattice.ingest import ingest_directory
+
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -49,6 +51,16 @@ class PipelineTest(unittest.TestCase):
         self.assertIn("timestamp", first_record["metadata"])
         self.assertTrue((output_dir / "reports" / "dataset_card.md").exists())
         self.assertTrue((output_dir / "reports" / "source_coverage.json").exists())
+
+    def test_ingest_ignores_manifest_files(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="lattice-ingest-") as temp_dir:
+            root = Path(temp_dir)
+            (root / "fetch_manifest.json").write_text('{"counts": {"openalex": 3}}', encoding="utf-8")
+            (root / "paper.txt").write_text("# Demo\n\nThis battery paper contains enough words to pass filtering.", encoding="utf-8")
+            records, warnings = ingest_directory(root, domain="materials")
+            self.assertEqual(len(records), 1)
+            self.assertEqual(records[0].schema_type, "Document")
+            self.assertEqual(warnings, [])
 
 
 if __name__ == "__main__":

@@ -1,0 +1,86 @@
+{
+  "version": "0.1",
+  "notes": "Phase 1 starter source registry for Lattice. Raw data should be stored outside git-tracked source code.",
+  "sources": [
+    {
+      "name": "openalex",
+      "category": "scholarly_metadata",
+      "priority": "P0",
+      "official_url": "https://developers.openalex.org/api-reference/introduction",
+      "access_mode": "REST API",
+      "schema_targets": ["Document"],
+      "license_status": "open metadata",
+      "recommended_storage_tier": "raw/api/openalex"
+    },
+    {
+      "name": "arxiv",
+      "category": "preprint_text",
+      "priority": "P0",
+      "official_url": "https://info.arxiv.org/help/api/index.html",
+      "access_mode": "API + bulk",
+      "schema_targets": ["Document"],
+      "license_status": "source-specific arXiv terms",
+      "recommended_storage_tier": "raw/api/arxiv"
+    },
+    {
+      "name": "materials_project",
+      "category": "structured_materials",
+      "priority": "P0",
+      "official_url": "https://docs.materialsproject.org/",
+      "access_mode": "API",
+      "schema_targets": ["StructuredRecord", "KnowledgeRecord"],
+      "license_status": "official API terms",
+      "recommended_storage_tier": "raw/api/materials_project"
+    },
+    {
+      "name": "oqmd",
+      "category": "structured_materials",
+      "priority": "P0",
+      "official_url": "https://oqmd.org/",
+      "access_mode": "API / download",
+      "schema_targets": ["StructuredRecord"],
+      "license_status": "CC BY 4.0",
+      "recommended_storage_tier": "raw/api/oqmd"
+    },
+    {
+      "name": "nomad",
+      "category": "materials_repository",
+      "priority": "P0",
+      "official_url": "https://nomad-lab.eu/nomad-lab/",
+      "access_mode": "API",
+      "schema_targets": ["StructuredRecord", "Document"],
+      "license_status": "CC BY 4.0",
+      "recommended_storage_tier": "raw/api/nomad"
+    },
+    {
+      "name": "jarvis",
+      "category": "materials_repository",
+      "priority": "P0",
+      "official_url": "https://jarvis.nist.gov/",
+      "access_mode": "downloads / OPTIMADE / tools",
+      "schema_targets": ["StructuredRecord", "Document"],
+      "license_status": "official access terms",
+      "recommended_storage_tier": "raw/api/jarvis"
+    },
+    {
+      "name": "pubchem",
+      "category": "chemical_properties",
+      "priority": "P0",
+      "official_url": "https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest",
+      "access_mode": "PUG REST",
+      "schema_targets": ["StructuredRecord", "KnowledgeRecord"],
+      "license_status": "open data",
+      "recommended_storage_tier": "raw/api/pubchem"
+    },
+    {
+      "name": "patentsview",
+      "category": "patents",
+      "priority": "P0",
+      "official_url": "https://www.uspto.gov/ip-policy/economic-research/patentsview",
+      "access_mode": "API / downloads",
+      "schema_targets": ["Document", "StructuredRecord"],
+      "license_status": "official access terms",
+      "recommended_storage_tier": "raw/api/patentsview"
+    }
+  ]
+}

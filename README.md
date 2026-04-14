@@ -10,6 +10,12 @@ The current implementation targets **Phase 1** of the research plan:
 - filter low-value inputs
 - export multiple dataset views for training and evaluation
 
+It now also includes a **real-source demo fetcher** that can pull a small public sample from:
+
+- OpenAlex
+- arXiv
+- PubChem
+
 ## Project Layout
 
 - `src/lattice/`: Python package
@@ -67,6 +73,19 @@ make compile-example
 make test
 ```
 
+Run a real-source demo:
+
+```bash
+PYTHONPATH=src python3 -m lattice demo \
+  --raw-output data/demo_raw/solid_state \
+  --compiled-output data/demo_compiled/solid_state \
+  --domain materials \
+  --dataset-name Lattice-Materials-RealDemo \
+  --query "solid state battery electrolyte" \
+  --compound "lithium iron phosphate" \
+  --compound "lithium cobalt oxide"
+```
+
 ## Output Views
 
 The compiler exports four dataset views:
@@ -99,3 +118,12 @@ Phase 1 currently includes:
 - end-to-end tests
 - GitHub Actions CI
 - contribution and release scaffolding
+
+## Storage Recommendation
+
+For serious use, keep real fetched data **outside the git-tracked repo**.
+
+- use the repo for code, configs, manifests, and small fixtures
+- use a separate local data root or object store for raw and compiled datasets
+
+See [docs/storage_architecture.md](docs/storage_architecture.md) for the recommended layout.

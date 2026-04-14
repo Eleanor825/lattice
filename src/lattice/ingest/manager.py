@@ -9,12 +9,21 @@ from lattice.ingest.text_adapter import parse_text_file
 from lattice.models import Record
 
 
+IGNORED_FILENAMES = {
+    "fetch_manifest.json",
+    "manifest.json",
+    "source_coverage.json",
+}
+
+
 def ingest_directory(path: str | Path, domain: str) -> tuple[list[Record], list[str]]:
     root = Path(path)
     records: list[Record] = []
     warnings: list[str] = []
     for file_path in sorted(root.rglob("*")):
         if not file_path.is_file():
+            continue
+        if file_path.name in IGNORED_FILENAMES:
             continue
         suffix = file_path.suffix.lower()
         if suffix in {".txt", ".md"}:
@@ -31,4 +40,3 @@ def ingest_directory(path: str | Path, domain: str) -> tuple[list[Record], list[
         else:
             warnings.append(f"Unsupported file type: {file_path}")
     return records, warnings
-
