@@ -1,44 +1,49 @@
 # Lattice
 
-Lattice is an open-source data compiler for scientific and materials-domain training data.
+> An open-source data compiler for scientific and materials foundation models.
 
-## Overall Goal
+Lattice is a data-centric project for turning fragmented scientific sources into reusable, provenance-aware, training-ready datasets.
 
-The goal of Lattice is to build a data-centric infrastructure for foundation models in science and materials.
+![Lattice roadmap](figures/phase1-phase2-roadmap.png)
 
-Instead of treating data collection as a one-off scraping task, Lattice treats data as a long-term asset:
+## Project Goal
+
+The goal of Lattice is to build a long-term data infrastructure for foundation models in science and materials.
+
+We do not want data collection to remain a one-off scraping workflow. We want it to become a reproducible system that can:
 
 - connect heterogeneous scientific sources
 - normalize them into a stable schema
 - preserve provenance, licensing, and dedup information
 - compile them into reusable training-ready dataset views
-- eventually learn how to select and use data more effectively
+- eventually learn which data is more valuable and how it should be used
 
-## Why We Need This
+## Why This Project
 
-Scientific and materials data is currently fragmented across:
+Scientific and materials data is split across many incompatible sources:
 
-- papers
-- preprints
+- papers and preprints
 - structured materials databases
-- chemistry databases
-- repositories
+- chemistry resources
+- repositories and archives
 - patents
 - educational resources
 
-This creates three problems:
+This creates a practical bottleneck:
 
-1. Useful data is hard to find and harder to unify.
-2. Even after collection, most data is not directly training-ready.
-3. Data selection and usage are still largely heuristic.
+1. useful data is scattered and hard to unify
+2. most collected data is not directly training-ready
+3. data usage is still largely heuristic
 
-We need this project because model progress in scientific domains is increasingly bottlenecked by data quality, provenance, structure, and reuse, not just by model architecture.
+Lattice exists because progress in scientific foundation models is increasingly constrained by data quality, structure, provenance, and reuse, not just by model architecture.
 
-## Phase 1
+## What Lattice Builds
 
-Phase 1 builds the **data compiler** itself.
+### Phase 1: Data Compiler
 
-The goal is to take heterogeneous raw sources and turn them into normalized, provenance-aware, training-ready data.
+Phase 1 builds the core data compiler.
+
+Its job is to take heterogeneous raw sources and turn them into normalized, provenance-aware, training-ready records and dataset views.
 
 Phase 1 focuses on:
 
@@ -46,32 +51,58 @@ Phase 1 focuses on:
 - schema normalization
 - provenance and license tracking
 - deduplication and quality filtering
-- dataset compilation into:
-  - pretraining view
-  - QA view
-  - instruction view
-  - knowledge view
+- compiled outputs for:
+  - pretraining
+  - QA
+  - instruction tuning
+  - knowledge records
 
-The current repository is primarily implementing this phase.
+### Phase 2: Data Intelligence
 
-## Phase 2
+Phase 2 builds the intelligence layer on top of Phase 1.
 
-Phase 2 builds the **data intelligence layer** on top of Phase 1.
-
-The goal is not just to compile data, but to understand which data is more valuable and how it should be used.
+Its job is not just to compile data, but to decide which data is more valuable and how it should be used for specific tasks and budgets.
 
 Phase 2 focuses on:
 
 - data valuation
-- task-conditioned data scoring
+- task-conditioned scoring
 - mixture selection
-- feeding strategy / curriculum optimization
-- proxy experiments for predicting downstream utility
+- feeding strategy and curriculum optimization
+- proxy experiments for downstream utility estimation
 
 In short:
 
-- Phase 1 answers: **How do we build high-quality scientific training data?**
-- Phase 2 answers: **Which data should we use, and how should we use it?**
+- Phase 1 asks: **How do we build high-quality scientific training data?**
+- Phase 2 asks: **Which data should we use, and how should we use it?**
+
+## Current Status
+
+The repository is currently implementing **Phase 1**.
+
+What is already in place:
+
+- a runnable compiler CLI
+- a stable schema boundary
+- provenance-aware normalization
+- filtering and deduplication
+- compiled dataset views
+- a starter source registry
+- real-source demo fetchers
+- P0 materials adapters for:
+  - OQMD
+  - NOMAD
+  - Materials Project with API-key gating
+- tests and CI
+
+## Repository Structure
+
+- `src/lattice/`: core package
+- `configs/`: source registry and fetch configuration
+- `docs/`: architecture notes and research documents
+- `docs/research/`: proposal, survey, and planning notes
+- `examples/`: small sample inputs
+- `tests/`: unit and end-to-end tests
 
 ## Daily Updates
 
@@ -95,40 +126,30 @@ In short:
 
 - Added a real-source demo fetcher for OpenAlex, arXiv, and PubChem.
 - Added a starter source registry and storage architecture document.
-- Added P0 materials source adapters for OQMD, NOMAD, and Materials Project.
+- Added registry-driven P0 materials source adapters for OQMD, NOMAD, and Materials Project.
 - Verified:
   - OQMD and NOMAD can be fetched into raw records
-  - fetched records can be compiled into Lattice dataset views
+  - fetched records can be compiled into Lattice views
   - Materials Project skips safely when no API key is configured
 - Reorganized the repository structure and moved planning documents into `docs/research/`.
+- Added the Phase 1 / Phase 2 roadmap figure.
 
-## Phase 1 / Phase 2 Diagram
+## Roadmap
 
-```mermaid
-flowchart LR
-    G["Overall Goal<br/>Build a data-centric infrastructure for science and materials foundation models"]
+Near-term priorities:
 
-    subgraph P1["Phase 1: Data Compiler"]
-        S1["Source Registry<br/>OpenAlex / arXiv / OQMD / NOMAD / MP / PubChem / Patents"]
-        S2["Ingestion<br/>API fetch / dumps / web / files"]
-        S3["Normalization<br/>Document / StructuredRecord / KnowledgeRecord / InstructionTrace"]
-        S4["Data Quality<br/>provenance / license / dedup / filtering"]
-        S5["Compiled Views<br/>pretraining / QA / instruction / knowledge"]
-        S6["Release Layer<br/>manifests / dataset cards / reproducible outputs"]
-        S1 --> S2 --> S3 --> S4 --> S5 --> S6
-    end
+- expand Phase 1 source coverage
+- improve source registry and license gating
+- build a stronger silver layer for cross-source alignment
+- release a larger materials-domain dataset
 
-    subgraph P2["Phase 2: Data Intelligence"]
-        T1["Value Modeling<br/>quality / novelty / affinity / coverage / utility"]
-        T2["Proxy Experiments<br/>small-budget utility estimation"]
-        T3["Mixture Selection<br/>which data to use"]
-        T4["Feeding Strategy<br/>curriculum / schedule / allocation"]
-        T5["Optimized Training Data<br/>task-conditioned data plan"]
-        T1 --> T2 --> T3 --> T4 --> T5
-    end
+Long-term priorities:
 
-    G --> P1
-    P1 --> P2
-    S5 -. feeds .-> T1
-    S6 -. release and evaluation signals .-> T2
-```
+- add value modeling
+- add mixture optimization
+- add feeding strategy optimization
+
+## Supporting Docs
+
+- [Storage Architecture](docs/storage_architecture.md)
+- [Research Notes Index](docs/research/README.md)
