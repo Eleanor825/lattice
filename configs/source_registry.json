@@ -44,6 +44,16 @@
       "auth_env": ["MP_API_KEY", "MATERIALS_PROJECT_API_KEY"]
     },
     {
+      "name": "mpcontribs",
+      "category": "materials_contributed_data",
+      "priority": "P0",
+      "official_url": "https://docs.materialsproject.org/services/mpcontribs",
+      "access_mode": "platform / api / python client",
+      "schema_targets": ["StructuredRecord"],
+      "license_status": "project-dependent",
+      "recommended_storage_tier": "raw/api/mpcontribs"
+    },
+    {
       "name": "oqmd",
       "category": "structured_materials",
       "priority": "P0",
@@ -62,6 +72,16 @@
       "schema_targets": ["StructuredRecord", "Document"],
       "license_status": "CC BY 4.0",
       "recommended_storage_tier": "raw/api/nomad"
+    },
+    {
+      "name": "aflow",
+      "category": "structured_materials",
+      "priority": "P1",
+      "official_url": "https://aflowlib.org/",
+      "access_mode": "REST / AFLUX",
+      "schema_targets": ["StructuredRecord"],
+      "license_status": "open access terms",
+      "recommended_storage_tier": "raw/api/aflow"
     },
     {
       "name": "jarvis",
@@ -112,6 +132,166 @@
       "schema_targets": ["StructuredRecord"],
       "license_status": "CC0 / public domain",
       "recommended_storage_tier": "raw/api/cod"
+    },
+    {
+      "name": "materials_cloud_archive",
+      "category": "materials_repository",
+      "priority": "P1",
+      "official_url": "https://archive.materialscloud.org/information",
+      "access_mode": "archive records / metadata / OAI-PMH",
+      "schema_targets": ["StructuredRecord", "Document"],
+      "license_status": "record-dependent; metadata machine-readable",
+      "recommended_storage_tier": "raw/api/materials_cloud_archive"
+    },
+    {
+      "name": "mdf",
+      "category": "materials_repository",
+      "priority": "P1",
+      "official_url": "https://www.materialsdatafacility.org/",
+      "access_mode": "discover / publish / api ecosystem",
+      "schema_targets": ["StructuredRecord"],
+      "license_status": "dataset-dependent open access",
+      "recommended_storage_tier": "raw/api/mdf"
+    },
+    {
+      "name": "nist_materials_data_repository",
+      "category": "materials_repository",
+      "priority": "P1",
+      "official_url": "https://materialsdata.nist.gov/",
+      "access_mode": "repository portal",
+      "schema_targets": ["StructuredRecord"],
+      "license_status": "open community repository",
+      "recommended_storage_tier": "raw/api/nist_materials_data_repository"
+    },
+    {
+      "name": "ncchemistry_webbook",
+      "category": "chemical_properties",
+      "priority": "P0",
+      "official_url": "https://webbook.nist.gov/",
+      "access_mode": "web resource",
+      "schema_targets": ["StructuredRecord", "KnowledgeRecord"],
+      "license_status": "official access terms",
+      "recommended_storage_tier": "raw/api/ncchemistry_webbook"
+    },
+    {
+      "name": "open_reaction_database",
+      "category": "reaction_data",
+      "priority": "P1",
+      "official_url": "https://docs.open-reaction-database.org/en/latest/overview.html",
+      "access_mode": "docs / repository",
+      "schema_targets": ["StructuredRecord", "InstructionTrace"],
+      "license_status": "open access",
+      "recommended_storage_tier": "raw/api/open_reaction_database"
+    },
+    {
+      "name": "open_catalyst_project",
+      "category": "catalysis_data",
+      "priority": "P1",
+      "official_url": "https://opencatalystproject.org/",
+      "access_mode": "dataset downloads + code",
+      "schema_targets": ["StructuredRecord"],
+      "license_status": "open access",
+      "recommended_storage_tier": "raw/api/open_catalyst_project"
+    },
+    {
+      "name": "catalysis_hub",
+      "category": "catalysis_data",
+      "priority": "P1",
+      "official_url": "https://www.catalysis-hub.org/",
+      "access_mode": "web platform",
+      "schema_targets": ["StructuredRecord", "KnowledgeRecord"],
+      "license_status": "open access",
+      "recommended_storage_tier": "raw/api/catalysis_hub"
+    },
+    {
+      "name": "battery_archive",
+      "category": "battery_data",
+      "priority": "P1",
+      "official_url": "https://batteryarchive.org/",
+      "access_mode": "website / csv access",
+      "schema_targets": ["StructuredRecord"],
+      "license_status": "open access with dataset-level conditions",
+      "recommended_storage_tier": "raw/api/battery_archive"
+    },
+    {
+      "name": "core",
+      "category": "open_access_aggregator",
+      "priority": "P1",
+      "official_url": "https://core.ac.uk/services/api",
+      "access_mode": "API",
+      "schema_targets": ["Document"],
+      "license_status": "API terms apply",
+      "recommended_storage_tier": "raw/api/core"
+    },
+    {
+      "name": "europe_pmc",
+      "category": "open_access_aggregator",
+      "priority": "P1",
+      "official_url": "https://europepmc.org/RestfulWebService",
+      "access_mode": "REST API",
+      "schema_targets": ["Document", "KnowledgeRecord"],
+      "license_status": "open access terms",
+      "recommended_storage_tier": "raw/api/europe_pmc"
+    },
+    {
+      "name": "wikipedia_dumps",
+      "category": "open_knowledge_text",
+      "priority": "P1",
+      "official_url": "https://dumps.wikimedia.org/legal.html",
+      "access_mode": "official dumps",
+      "schema_targets": ["Document"],
+      "license_status": "CC BY-SA / Wikimedia terms",
+      "recommended_storage_tier": "raw/dumps/wikipedia"
+    },
+    {
+      "name": "chem_libretexts",
+      "category": "open_education",
+      "priority": "P1",
+      "official_url": "https://chem.libretexts.org/",
+      "access_mode": "web pages / pdfs",
+      "schema_targets": ["Document"],
+      "license_status": "page-level open license variations",
+      "recommended_storage_tier": "raw/web/chem_libretexts"
+    },
+    {
+      "name": "mit_ocw",
+      "category": "open_education",
+      "priority": "P1",
+      "official_url": "https://ocw.mit.edu/index.html",
+      "access_mode": "course site",
+      "schema_targets": ["Document"],
+      "license_status": "openly licensed course materials",
+      "recommended_storage_tier": "raw/web/mit_ocw"
+    },
+    {
+      "name": "nptel",
+      "category": "open_education",
+      "priority": "P1",
+      "official_url": "https://nptel.ac.in/",
+      "access_mode": "course site",
+      "schema_targets": ["Document"],
+      "license_status": "course-level terms",
+      "recommended_storage_tier": "raw/web/nptel"
+    },
+    {
+      "name": "patentscope",
+      "category": "patents",
+      "priority": "P1",
+      "official_url": "https://www.wipo.int/en/web/patentscope/index",
+      "access_mode": "search / api-related access",
+      "schema_targets": ["Document"],
+      "license_status": "official terms",
+      "recommended_storage_tier": "raw/api/patentscope"
+    },
+    {
+      "name": "epo_ops",
+      "category": "patents",
+      "priority": "P1",
+      "official_url": "https://www.epo.org/en/searching-for-patents/technical/espacenet",
+      "access_mode": "OPS automation path",
+      "schema_targets": ["Document"],
+      "license_status": "official terms",
+      "recommended_storage_tier": "raw/api/epo_ops"
     }
   ]
 }

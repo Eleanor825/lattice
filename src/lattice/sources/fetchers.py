@@ -13,6 +13,7 @@ from lattice.sources.nomad import fetch_nomad_materials
 from lattice.sources.openalex import fetch_openalex_documents
 from lattice.sources.oqmd import fetch_oqmd_structures
 from lattice.sources.patentsview import fetch_patentsview_placeholder
+from lattice.sources.placeholders import fetch_open_source_placeholder
 from lattice.sources.pubchem import fetch_pubchem_compounds
 from lattice.sources.registry import registry_source_map
 from lattice.sources.wikidata import fetch_wikidata_knowledge
@@ -29,6 +30,24 @@ SUPPORTED_SOURCES = {
     "nomad",
     "materials_project",
     "patentsview",
+    "aflow",
+    "materials_cloud_archive",
+    "mdf",
+    "nist_materials_data_repository",
+    "ncchemistry_webbook",
+    "open_reaction_database",
+    "open_catalyst_project",
+    "catalysis_hub",
+    "battery_archive",
+    "core",
+    "europe_pmc",
+    "wikipedia_dumps",
+    "chem_libretexts",
+    "mit_ocw",
+    "nptel",
+    "patentscope",
+    "epo_ops",
+    "cod",
 }
 
 
@@ -80,6 +99,31 @@ def run_source_fetch(config: SourceFetchConfig) -> dict[str, Any]:
                 warnings.extend(source_warnings)
             elif source_name == "patentsview":
                 rows, source_warnings = fetch_patentsview_placeholder()
+                warnings.extend(source_warnings)
+            elif source_name in {
+                "aflow",
+                "materials_cloud_archive",
+                "mdf",
+                "nist_materials_data_repository",
+                "ncchemistry_webbook",
+                "open_reaction_database",
+                "open_catalyst_project",
+                "catalysis_hub",
+                "battery_archive",
+                "core",
+                "europe_pmc",
+                "wikipedia_dumps",
+                "chem_libretexts",
+                "mit_ocw",
+                "nptel",
+                "patentscope",
+                "epo_ops",
+                "cod",
+            }:
+                rows, source_warnings = fetch_open_source_placeholder(
+                    source_name,
+                    "registered in the open-source catalog; connector path reserved for Phase 1 source expansion.",
+                )
                 warnings.extend(source_warnings)
             else:
                 warnings.append(f"Source fetcher not implemented yet: {source_name}")

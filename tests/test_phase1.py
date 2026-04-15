@@ -60,6 +60,36 @@ class Phase1WorkflowTest(unittest.TestCase):
             self.assertIn("gold", payload)
             self.assertGreaterEqual(payload["fetch"]["counts"]["pubchem"], 1)
 
+    def test_phase1_run_with_connector_ready_source_does_not_fail(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="lattice-phase1-connector-") as data_root:
+            env = dict(os.environ)
+            env["PYTHONPATH"] = str(ROOT / "src")
+            cmd = [
+                sys.executable,
+                "-m",
+                "lattice",
+                "phase1-run",
+                "--data-root",
+                data_root,
+                "--registry",
+                str(ROOT / "configs" / "source_registry.json"),
+                "--domain",
+                "materials",
+                "--release-name",
+                "phase1-connector-test",
+                "--source",
+                "aflow",
+                "--source",
+                "openalex",
+                "--limit",
+                "1",
+            ]
+            result = subprocess.run(cmd, check=True, capture_output=True, text=True, env=env)
+            payload = json.loads(result.stdout)
+            self.assertIn("fetch", payload)
+            self.assertIn("aflow", payload["fetch"]["counts"])
+            self.assertIn("warnings", payload["fetch"])
+
 
 if __name__ == "__main__":
     unittest.main()
