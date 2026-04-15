@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 import json
+import os
+import sys
+from pathlib import Path
 
 from lattice.engines.shared import (
     EngineConfig,
@@ -9,6 +12,14 @@ from lattice.engines.shared import (
     load_record_dicts_from_jsonl,
     write_engine_outputs,
 )
+
+
+def _configure_java17_if_available() -> None:
+    java_home = Path("/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home")
+    java_bin = java_home / "bin"
+    if java_home.exists() and java_bin.exists():
+        os.environ["JAVA_HOME"] = str(java_home)
+        os.environ["PATH"] = f"{java_bin}:{os.environ.get('PATH', '')}"
 
 
 def _process_json_line(line: str) -> str:
@@ -29,8 +40,12 @@ def run_flink_engine(config: EngineConfig) -> dict[str, object]:
     record_dicts = load_record_dicts_from_jsonl(config.input_dir)
     json_lines = [json.dumps(record_dict, ensure_ascii=False) for record_dict in record_dicts]
 
+    _configure_java17_if_available()
+    python_exec = sys.executable
+    os.environ["PYFLINK_CLIENT_EXECUTABLE"] = python_exec
     env = StreamExecutionEnvironment.get_execution_environment()
     env.set_parallelism(1)
+    env.set_python_executable(python_exec)
     stream = env.from_collection(json_lines, type_info=Types.STRING())
     processed_stream = stream.map(_process_json_line, output_type=Types.STRING())
     processed_rows = [json.loads(item) for item in processed_stream.execute_and_collect()]
@@ -53,11 +68,14 @@ def flink_smoke_check() -> dict[str, object]:
         return {"available": False, "detail": str(exc)}
 
     try:
+        _configure_java17_if_available()
+        python_exec = sys.executable
+        os.environ["PYFLINK_CLIENT_EXECUTABLE"] = python_exec
         env = StreamExecutionEnvironment.get_execution_environment()
         env.set_parallelism(1)
+        env.set_python_executable(python_exec)
         stream = env.from_collection(["1", "2", "3"], type_info=Types.STRING())
         count = sum(1 for _ in stream.execute_and_collect())
         return {"available": True, "detail": f"Flink local smoke test passed with count={count}."}
     except Exception as exc:  # pragma: no cover - environment dependent
         return {"available": False, "detail": str(exc)}
-

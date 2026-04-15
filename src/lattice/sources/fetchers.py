@@ -18,6 +18,7 @@ from lattice.sources.patentsview import fetch_patentsview_placeholder
 from lattice.sources.placeholders import fetch_open_source_placeholder
 from lattice.sources.pubchem import fetch_pubchem_compounds
 from lattice.sources.registry import registry_source_map
+from lattice.sources.webdocs import fetch_page_document
 from lattice.sources.wikidata import fetch_wikidata_knowledge
 
 
@@ -25,6 +26,7 @@ SUPPORTED_SOURCES = {
     "openalex",
     "crossref",
     "arxiv",
+    "mpcontribs",
     "wikidata",
     "jarvis",
     "pubchem",
@@ -50,6 +52,36 @@ SUPPORTED_SOURCES = {
     "patentscope",
     "epo_ops",
     "cod",
+}
+
+
+PAGE_DOC_SOURCES = {
+    "aflow": ("https://aflowlib.org/", "AFLOW materials platform landing page."),
+    "mpcontribs": (
+        "https://docs.materialsproject.org/services/mpcontribs",
+        "Materials Project contributed data service overview.",
+    ),
+    "mdf": ("https://www.materialsdatafacility.org/", "Materials Data Facility landing page."),
+    "nist_materials_data_repository": (
+        "https://materialsdata.nist.gov/",
+        "NIST Materials Data Repository landing page.",
+    ),
+    "ncchemistry_webbook": ("https://webbook.nist.gov/", "NIST Chemistry WebBook landing page."),
+    "open_reaction_database": ("https://open-reaction-database.org/", "Open Reaction Database landing page."),
+    "open_catalyst_project": ("https://opencatalystproject.org/", "Open Catalyst Project landing page."),
+    "catalysis_hub": ("https://www.catalysis-hub.org/", "Catalysis-Hub landing page."),
+    "battery_archive": ("https://batteryarchive.org/", "Battery Archive landing page."),
+    "core": ("https://core.ac.uk/services/api", "CORE API landing page."),
+    "wikipedia_dumps": ("https://dumps.wikimedia.org/legal.html", "Wikimedia dumps access and legal page."),
+    "chem_libretexts": ("https://chem.libretexts.org/", "ChemLibreTexts landing page."),
+    "mit_ocw": ("https://ocw.mit.edu/index.html", "MIT OpenCourseWare landing page."),
+    "nptel": ("https://nptel.ac.in/", "NPTEL landing page."),
+    "patentscope": ("https://www.wipo.int/en/web/patentscope/index", "PATENTSCOPE landing page."),
+    "epo_ops": (
+        "https://www.epo.org/en/searching-for-patents/technical/espacenet",
+        "EPO access page covering Espacenet and OPS automation path.",
+    ),
+    "cod": ("https://crystallography.net/cod/", "Crystallography Open Database landing page."),
 }
 
 
@@ -106,29 +138,9 @@ def run_source_fetch(config: SourceFetchConfig) -> dict[str, Any]:
             elif source_name == "patentsview":
                 rows, source_warnings = fetch_patentsview_placeholder()
                 warnings.extend(source_warnings)
-            elif source_name in {
-                "aflow",
-                "mdf",
-                "nist_materials_data_repository",
-                "ncchemistry_webbook",
-                "open_reaction_database",
-                "open_catalyst_project",
-                "catalysis_hub",
-                "battery_archive",
-                "core",
-                "wikipedia_dumps",
-                "chem_libretexts",
-                "mit_ocw",
-                "nptel",
-                "patentscope",
-                "epo_ops",
-                "cod",
-            }:
-                rows, source_warnings = fetch_open_source_placeholder(
-                    source_name,
-                    "registered in the open-source catalog; connector path reserved for Phase 1 source expansion.",
-                )
-                warnings.extend(source_warnings)
+            elif source_name in PAGE_DOC_SOURCES:
+                page_url, note = PAGE_DOC_SOURCES[source_name]
+                rows = fetch_page_document(source_name, page_url, config.domain, note=note)
             else:
                 warnings.append(f"Source fetcher not implemented yet: {source_name}")
                 continue

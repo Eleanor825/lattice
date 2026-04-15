@@ -145,7 +145,7 @@ So today, Lattice is already functioning as the **data foundation layer** of the
 | Dataset view compilation | ✅ Implemented |
 | Local execution | ✅ Implemented |
 | Spark execution | ✅ Implemented |
-| Flink execution | ◐ Code path implemented, runtime not fully working locally yet |
+| Flink execution | ✅ Implemented |
 | Pretraining workflow | ◐ Platform target, not fully implemented yet |
 | Continued pretraining workflow | ◐ Platform target, not fully implemented yet |
 | Fine-tuning workflow | ◐ Platform target, not fully implemented yet |
@@ -202,7 +202,7 @@ So today, Lattice is already functioning as the **data foundation layer** of the
 |---|---:|---:|---|---|
 | Local | ✅ | ✅ | Ready | Default development path |
 | Spark | ✅ | ✅ | Ready | Local Spark mode verified |
-| Flink | ◐ | ❌ | Partial | Code path exists, current local runtime still blocked |
+| Flink | ✅ | ✅ | Ready | Validated with PyFlink + Java 17 local runtime |
 
 ## Platform Comparison
 

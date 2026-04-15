@@ -6,6 +6,7 @@ from lattice.sources.crossref import fetch_crossref_documents
 from lattice.sources.europe_pmc import fetch_europe_pmc_documents
 from lattice.sources.jarvis import fetch_jarvis_structures
 from lattice.sources.materials_cloud_archive import fetch_materials_cloud_records
+from lattice.sources.webdocs import fetch_page_document
 from lattice.sources.wikidata import fetch_wikidata_knowledge
 
 
@@ -39,6 +40,17 @@ class AdditionalSourceTest(unittest.TestCase):
         self.assertGreaterEqual(len(rows), 1)
         self.assertEqual(rows[0]["schema_type"], "Document")
         self.assertEqual(rows[0]["source_type"], "materials_cloud_archive")
+
+    def test_webdoc_fetch_returns_document(self) -> None:
+        rows = fetch_page_document(
+            "battery_archive",
+            "https://batteryarchive.org/",
+            domain="materials",
+            note="Battery Archive landing page.",
+        )
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["schema_type"], "Document")
+        self.assertEqual(rows[0]["source_type"], "battery_archive")
 
 
 if __name__ == "__main__":

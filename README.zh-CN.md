@@ -146,7 +146,7 @@ Phase 2 计划支持：
 | 训练视图编译 | ✅ 已实现 |
 | 本地执行 | ✅ 已实现 |
 | Spark 执行 | ✅ 已实现 |
-| Flink 执行 | ◐ 已有代码路径，但本机 runtime 还未完全跑通 |
+| Flink 执行 | ✅ 已实现 |
 | Pretraining 工作流 | ◐ 平台目标，尚未完整实现 |
 | Continued pretraining 工作流 | ◐ 平台目标，尚未完整实现 |
 | Fine-tuning 工作流 | ◐ 平台目标，尚未完整实现 |
@@ -203,7 +203,7 @@ Phase 2 计划支持：
 |---|---:|---:|---|---|
 | Local | ✅ | ✅ | Ready | 默认开发路径 |
 | Spark | ✅ | ✅ | Ready | Spark local mode 已验证 |
-| Flink | ◐ | ❌ | Partial | 已有代码路径，但当前本地 runtime 仍有阻塞 |
+| Flink | ✅ | ✅ | Ready | 已通过 PyFlink + Java 17 本地 runtime 验证 |
 
 ## 平台对比
 
