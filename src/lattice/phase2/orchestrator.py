@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from lattice.engines import EngineConfig, run_engine_compile
+from lattice.platform.sync import sync_phase2_manifest
 from lattice.phase2.providers import ModelBackendConfig, run_backend_workflow
 from lattice.sources.common import timestamp_now
 from lattice.utils import ensure_dir, write_json
@@ -26,6 +27,7 @@ class Phase2Config:
     api_key_env: str = ""
     domain: str = "materials"
     checkpoint_dir: str = ""
+    registry_db: str = ""
     epochs: int = 1
     batch_size: int = 2
     learning_rate: float = 3e-4
@@ -82,5 +84,6 @@ def run_phase2_pipeline(config: Phase2Config) -> dict[str, Any]:
         "backend_result": backend_result,
     }
     write_json(output_dir / "phase2_manifest.json", manifest)
+    if config.registry_db:
+        sync_phase2_manifest(config.registry_db, output_dir / "phase2_manifest.json")
     return manifest
-

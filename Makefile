@@ -1,4 +1,4 @@
-.PHONY: test compile-example demo fetch-p0 phase1-release engine-check engine-local engine-pandas engine-spark engine-flink train-pretrain train-continue train-finetune train-post phase2-open phase2-closed stats clean
+.PHONY: test compile-example demo fetch-p0 phase1-release engine-check engine-local engine-pandas engine-spark engine-flink train-pretrain train-continue train-finetune train-post phase2-open phase2-closed registry-sync serve-platform stats clean
 
 test:
 	PYTHONPATH=src python3 -m unittest discover -s tests -v
@@ -128,6 +128,12 @@ phase2-closed:
 		--provider openai_compatible \
 		--model-family closed \
 		--compiled-input
+
+registry-sync:
+	PYTHONPATH=src python3 -m lattice registry-sync --db ~/.lattice/registry.db --phase phase1 --manifest phase1-data/manifests/release=lattice-materials-demo/phase1_manifest.json
+
+serve-platform:
+	PYTHONPATH=src python3 -m lattice serve-platform --db ~/.lattice/registry.db --host 127.0.0.1 --port 8787
 
 stats:
 	PYTHONPATH=src python3 -m lattice stats --path outputs/materials

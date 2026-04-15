@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from lattice.compiler import CompilerConfig, compile_dataset
+from lattice.platform.sync import sync_phase1_manifest
 from lattice.silver import SilverLinkConfig, build_silver_layer
 from lattice.sources.common import timestamp_now
 from lattice.sources.fetchers import SourceFetchConfig, implemented_sources, run_source_fetch
@@ -23,6 +24,7 @@ class Phase1Config:
     sources: list[str] = field(default_factory=list)
     limit: int = 3
     include_optional_sources: bool = False
+    registry_db: str = ""
 
 
 def _release_paths(config: Phase1Config) -> dict[str, Path]:
@@ -102,4 +104,6 @@ def run_phase1_pipeline(config: Phase1Config) -> dict[str, Any]:
         "gold": gold_manifest,
     }
     write_json(paths["manifests"] / "phase1_manifest.json", phase1_manifest)
+    if config.registry_db:
+        sync_phase1_manifest(config.registry_db, paths["manifests"] / "phase1_manifest.json")
     return phase1_manifest

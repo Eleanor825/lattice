@@ -8,6 +8,8 @@ from pathlib import Path
 from lattice.compiler import CompilerConfig, compile_dataset
 from lattice.engines import EngineConfig, engine_check, run_engine_compile
 from lattice.phase2 import Phase2Config, run_phase2_pipeline
+from lattice.platform.server import create_app
+from lattice.platform.sync import sync_phase1_manifest, sync_phase2_manifest
 from lattice.sources import DemoFetchConfig, SourceFetchConfig, run_demo_fetch, run_source_fetch
 from lattice.training import TrainingConfig, run_training_workflow
 from lattice.utils import read_json
@@ -138,6 +140,7 @@ def _build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Also include optional sources when selecting from the registry automatically.",
     )
+    phase1_parser.add_argument("--registry-db", default="", help="Optional SQLite registry DB path.")
 
     for workflow_name in ("train-pretrain", "train-continue", "train-finetune", "train-post"):
         train_parser = subparsers.add_parser(workflow_name, help=f"Run the {workflow_name.replace('train-', '')} workflow.")
@@ -169,6 +172,7 @@ def _build_parser() -> argparse.ArgumentParser:
     phase2_parser.add_argument("--domain", default="materials", help="Target domain.")
     phase2_parser.add_argument("--checkpoint-dir", default="", help="Optional checkpoint dir for continue/fine-tune/post-train.")
     phase2_parser.add_argument("--compiled-input", action="store_true", help="Treat input as an already-compiled dataset.")
+    phase2_parser.add_argument("--registry-db", default="", help="Optional SQLite registry DB path.")
     phase2_parser.add_argument("--epochs", type=int, default=1, help="Training epochs.")
     phase2_parser.add_argument("--batch-size", type=int, default=2, help="Training batch size.")
     phase2_parser.add_argument("--learning-rate", type=float, default=3e-4, help="Learning rate.")
@@ -177,6 +181,16 @@ def _build_parser() -> argparse.ArgumentParser:
 
     stats_parser = subparsers.add_parser("stats", help="Print summary stats from a compiled output.")
     stats_parser.add_argument("--path", required=True, help="Compiled output directory or manifest path.")
+
+    registry_parser = subparsers.add_parser("registry-sync", help="Sync a phase1/phase2 manifest into the platform registry.")
+    registry_parser.add_argument("--db", required=True, help="SQLite registry DB path.")
+    registry_parser.add_argument("--phase", required=True, choices=["phase1", "phase2"])
+    registry_parser.add_argument("--manifest", required=True, help="Manifest JSON path.")
+
+    serve_parser = subparsers.add_parser("serve-platform", help="Serve the platform registry API with FastAPI.")
+    serve_parser.add_argument("--db", required=True, help="SQLite registry DB path.")
+    serve_parser.add_argument("--host", default="127.0.0.1")
+    serve_parser.add_argument("--port", type=int, default=8787)
     return parser
 
 
@@ -267,6 +281,7 @@ def _handle_phase1_run(args: argparse.Namespace) -> int:
         sources=args.source,
         limit=args.limit,
         include_optional_sources=args.include_optional_sources,
+        registry_db=args.registry_db,
     )
     manifest = run_phase1_pipeline(config)
     print(json.dumps(manifest, indent=2, ensure_ascii=False))
@@ -309,6 +324,7 @@ def _handle_phase2_run(args: argparse.Namespace) -> int:
             api_key_env=args.api_key_env,
             domain=args.domain,
             checkpoint_dir=args.checkpoint_dir,
+            registry_db=args.registry_db,
             epochs=args.epochs,
             batch_size=args.batch_size,
             learning_rate=args.learning_rate,
@@ -317,6 +333,23 @@ def _handle_phase2_run(args: argparse.Namespace) -> int:
         )
     )
     print(json.dumps(manifest, indent=2, ensure_ascii=False))
+    return 0
+
+
+def _handle_registry_sync(args: argparse.Namespace) -> int:
+    if args.phase == "phase1":
+        payload = sync_phase1_manifest(args.db, args.manifest)
+    else:
+        payload = sync_phase2_manifest(args.db, args.manifest)
+    print(json.dumps(payload, indent=2, ensure_ascii=False))
+    return 0
+
+
+def _handle_serve_platform(args: argparse.Namespace) -> int:
+    import uvicorn
+
+    app = create_app(args.db)
+    uvicorn.run(app, host=args.host, port=args.port)
     return 0
 
 
@@ -379,6 +412,10 @@ def main(argv: list[str] | None = None) -> int:
         return _handle_training_workflow(args, "posttrain")
     if args.command == "phase2-run":
         return _handle_phase2_run(args)
+    if args.command == "registry-sync":
+        return _handle_registry_sync(args)
+    if args.command == "serve-platform":
+        return _handle_serve_platform(args)
     if args.command == "demo":
         return _handle_demo(args)
     if args.command == "stats":
