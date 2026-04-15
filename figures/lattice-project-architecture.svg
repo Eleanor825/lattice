@@ -1,145 +1,82 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 930" role="img" aria-labelledby="title desc">
-  <title id="title">Lattice Project Architecture</title>
-  <desc id="desc">A monochrome, minimal architecture diagram for the Lattice platform.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 560" role="img" aria-labelledby="title desc">
+  <title id="title">Lattice High-Level Architecture</title>
+  <desc id="desc">A minimalist high-level diagram showing how Lattice turns fragmented scientific sources into training-ready data and portable model workflows.</desc>
   <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fbfcfd"/>
+      <stop offset="100%" stop-color="#f4f7fa"/>
+    </linearGradient>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
-      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#111827" flood-opacity="0.06"/>
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#111827" flood-opacity="0.06"/>
     </filter>
     <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
       <path d="M1 1 L11 6 L1 11 Z" fill="#9ca3af"/>
     </marker>
     <style>
-      .bg { fill: #f7f8fa; }
-      .panel { fill: #ffffff; stroke: #e5e7eb; stroke-width: 1.5; filter: url(#shadow); }
-      .card { fill: #ffffff; stroke: #d1d5db; stroke-width: 1.25; }
-      .chip { fill: #f3f4f6; stroke: #e5e7eb; stroke-width: 1; }
-      .line { stroke: #9ca3af; stroke-width: 3; fill: none; marker-end: url(#arrow); stroke-linecap: round; }
-      .node { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2.5; }
-      .kicker { font: 700 12px 'Inter','Segoe UI',Arial,sans-serif; letter-spacing: 0.18em; fill: #6b7280; }
-      .hero-title { font: 700 50px 'Inter','Segoe UI',Arial,sans-serif; fill: #111827; }
-      .hero-sub { font: 500 22px 'Inter','Segoe UI',Arial,sans-serif; fill: #4b5563; }
-      .pill { font: 700 14px 'Inter','Segoe UI',Arial,sans-serif; fill: #374151; }
-      .section-chip { font: 700 12px 'Inter','Segoe UI',Arial,sans-serif; letter-spacing: 0.08em; fill: #6b7280; }
-      .section-title { font: 700 28px 'Inter','Segoe UI',Arial,sans-serif; fill: #111827; }
-      .card-title { font: 700 21px 'Inter','Segoe UI',Arial,sans-serif; fill: #111827; }
-      .card-copy { font: 600 15px 'Inter','Segoe UI',Arial,sans-serif; fill: #6b7280; }
-      .footer-chip { font: 700 18px 'Inter','Segoe UI',Arial,sans-serif; fill: #111827; }
-      .motif { stroke: #c4cad4; stroke-width: 2; fill: none; }
+      .title { font: 700 52px 'Inter','Segoe UI',Arial,sans-serif; fill: #111827; }
+      .subtitle { font: 500 24px 'Inter','Segoe UI',Arial,sans-serif; fill: #4b5563; }
+      .kicker { font: 700 12px 'Inter','Segoe UI',Arial,sans-serif; letter-spacing: 0.2em; fill: #6b7280; }
+      .summary { font: 500 20px 'Inter','Segoe UI',Arial,sans-serif; fill: #374151; }
+      .node-title { font: 700 24px 'Inter','Segoe UI',Arial,sans-serif; fill: #111827; }
+      .node-copy { font: 600 15px 'Inter','Segoe UI',Arial,sans-serif; fill: #6b7280; }
+      .chip { font: 700 15px 'Inter','Segoe UI',Arial,sans-serif; fill: #374151; }
+      .pill { fill: rgba(255,255,255,0.96); stroke: #d9e1ea; stroke-width: 1.5; filter: url(#shadow); }
+      .small-pill { fill: rgba(255,255,255,0.92); stroke: #e5e7eb; stroke-width: 1.25; }
+      .flow { stroke: #9ca3af; stroke-width: 3; fill: none; marker-end: url(#arrow); stroke-linecap: round; }
+      .motif { stroke: #c4ccd7; stroke-width: 2; fill: none; }
       .motif-node { fill: #ffffff; stroke: #9ca3af; stroke-width: 2; }
     </style>
   </defs>
 
-  <rect width="1400" height="930" class="bg"/>
+  <rect width="1400" height="560" fill="url(#bg)"/>
 
-  <rect x="56" y="34" width="1288" height="148" rx="30" class="panel"/>
-  <text x="92" y="80" class="kicker">OPEN-SOURCE DATA PLATFORM</text>
-  <text x="92" y="134" class="hero-title">Lattice</text>
-  <text x="92" y="166" class="hero-sub">Project architecture</text>
+  <text x="72" y="70" class="kicker">OPEN-SOURCE DATA PLATFORM</text>
+  <text x="72" y="126" class="title">Lattice</text>
+  <text x="72" y="160" class="subtitle">Scientific sources to trainable models</text>
+  <text x="72" y="218" class="summary">We collect fragmented scientific data, turn it into training-ready datasets, and run portable model workflows.</text>
 
-  <rect x="930" y="58" width="122" height="36" rx="18" class="chip"/>
-  <text x="991" y="81" text-anchor="middle" class="pill">Phase 1 ready</text>
-  <rect x="1066" y="58" width="118" height="36" rx="18" class="chip"/>
-  <text x="1125" y="81" text-anchor="middle" class="pill">Spark + Flink</text>
-  <rect x="1198" y="58" width="82" height="36" rx="18" class="chip"/>
-  <text x="1239" y="81" text-anchor="middle" class="pill">Rerun</text>
+  <path d="M1148 94 L1182 66 L1216 94 L1182 122 Z" class="motif"/>
+  <path d="M1182 66 L1230 58 L1264 88 L1254 136 L1200 144 L1160 118 Z" class="motif"/>
+  <line x1="1182" y1="66" x2="1200" y2="144" class="motif"/>
+  <line x1="1230" y1="58" x2="1160" y2="118" class="motif"/>
+  <line x1="1216" y1="94" x2="1254" y2="136" class="motif"/>
+  <circle cx="1182" cy="66" r="5.5" class="motif-node"/>
+  <circle cx="1230" cy="58" r="5.5" class="motif-node"/>
+  <circle cx="1264" cy="88" r="5.5" class="motif-node"/>
+  <circle cx="1254" cy="136" r="5.5" class="motif-node"/>
+  <circle cx="1200" cy="144" r="5.5" class="motif-node"/>
+  <circle cx="1160" cy="118" r="5.5" class="motif-node"/>
 
-  <path d="M1126 122 L1160 94 L1194 122 L1160 150 Z" class="motif"/>
-  <path d="M1160 94 L1208 86 L1244 116 L1234 164 L1178 172 L1138 146 Z" class="motif"/>
-  <line x1="1160" y1="94" x2="1178" y2="172" class="motif"/>
-  <line x1="1208" y1="86" x2="1138" y2="146" class="motif"/>
-  <line x1="1194" y1="122" x2="1234" y2="164" class="motif"/>
-  <circle cx="1160" cy="94" r="5.5" class="motif-node"/>
-  <circle cx="1208" cy="86" r="5.5" class="motif-node"/>
-  <circle cx="1244" cy="116" r="5.5" class="motif-node"/>
-  <circle cx="1234" cy="164" r="5.5" class="motif-node"/>
-  <circle cx="1178" cy="172" r="5.5" class="motif-node"/>
-  <circle cx="1138" cy="146" r="5.5" class="motif-node"/>
+  <rect x="72" y="280" width="264" height="110" rx="26" class="pill"/>
+  <text x="204" y="324" text-anchor="middle" class="node-title">Scientific sources</text>
+  <text x="204" y="352" text-anchor="middle" class="node-copy">papers · materials DBs</text>
+  <text x="204" y="374" text-anchor="middle" class="node-copy">chemistry · knowledge</text>
 
-  <rect x="56" y="212" width="1288" height="108" rx="26" class="panel"/>
-  <rect x="84" y="236" width="108" height="26" rx="13" class="chip"/>
-  <text x="138" y="253" text-anchor="middle" class="section-chip">1 · SOURCES</text>
-  <text x="84" y="292" class="section-title">Scientific inputs</text>
+  <rect x="390" y="280" width="264" height="110" rx="26" class="pill"/>
+  <text x="522" y="324" text-anchor="middle" class="node-title">Data foundation</text>
+  <text x="522" y="352" text-anchor="middle" class="node-copy">connect · normalize</text>
+  <text x="522" y="374" text-anchor="middle" class="node-copy">curate · release</text>
 
-  <rect x="84" y="262" width="382" height="42" rx="16" class="card"/>
-  <text x="275" y="281" text-anchor="middle" class="card-title">Papers</text>
-  <text x="275" y="298" text-anchor="middle" class="card-copy">OpenAlex · Crossref · arXiv · Europe PMC</text>
+  <rect x="708" y="280" width="264" height="110" rx="26" class="pill"/>
+  <text x="840" y="324" text-anchor="middle" class="node-title">Portable workflows</text>
+  <text x="840" y="352" text-anchor="middle" class="node-copy">registry · replay</text>
+  <text x="840" y="374" text-anchor="middle" class="node-copy">pandas · Spark · Flink</text>
 
-  <rect x="509" y="262" width="382" height="42" rx="16" class="card"/>
-  <text x="700" y="281" text-anchor="middle" class="card-title">Materials DBs</text>
-  <text x="700" y="298" text-anchor="middle" class="card-copy">Materials Project · OQMD · NOMAD · JARVIS</text>
+  <rect x="1026" y="280" width="302" height="110" rx="26" class="pill"/>
+  <text x="1177" y="324" text-anchor="middle" class="node-title">Training platform</text>
+  <text x="1177" y="352" text-anchor="middle" class="node-copy">pretrain · continue · finetune</text>
+  <text x="1177" y="374" text-anchor="middle" class="node-copy">post-train · model outputs</text>
 
-  <rect x="934" y="262" width="382" height="42" rx="16" class="card"/>
-  <text x="1125" y="281" text-anchor="middle" class="card-title">Chemistry + knowledge</text>
-  <text x="1125" y="298" text-anchor="middle" class="card-copy">PubChem · Wikidata · NIST · catalysis</text>
+  <line x1="336" y1="335" x2="390" y2="335" class="flow"/>
+  <line x1="654" y1="335" x2="708" y2="335" class="flow"/>
+  <line x1="972" y1="335" x2="1026" y2="335" class="flow"/>
 
-  <line x1="700" y1="320" x2="700" y2="352" class="line"/>
-  <circle cx="700" cy="336" r="8" class="node"/>
+  <rect x="430" y="442" width="160" height="34" rx="17" class="small-pill"/>
+  <text x="510" y="464" text-anchor="middle" class="chip">open source</text>
 
-  <rect x="56" y="352" width="1288" height="140" rx="26" class="panel"/>
-  <rect x="84" y="376" width="114" height="26" rx="13" class="chip"/>
-  <text x="141" y="393" text-anchor="middle" class="section-chip">2 · PHASE 1</text>
-  <text x="84" y="432" class="section-title">Data foundation</text>
+  <rect x="620" y="442" width="160" height="34" rx="17" class="small-pill"/>
+  <text x="700" y="464" text-anchor="middle" class="chip">local-first</text>
 
-  <rect x="84" y="416" width="284" height="56" rx="18" class="card"/>
-  <text x="226" y="438" text-anchor="middle" class="card-title">Connect</text>
-  <text x="226" y="456" text-anchor="middle" class="card-copy">registry · adapters</text>
-
-  <rect x="390" y="416" width="284" height="56" rx="18" class="card"/>
-  <text x="532" y="438" text-anchor="middle" class="card-title">Normalize</text>
-  <text x="532" y="456" text-anchor="middle" class="card-copy">documents · records</text>
-
-  <rect x="696" y="416" width="284" height="56" rx="18" class="card"/>
-  <text x="838" y="438" text-anchor="middle" class="card-title">Curate</text>
-  <text x="838" y="456" text-anchor="middle" class="card-copy">lineage · dedup · license</text>
-
-  <rect x="1002" y="416" width="314" height="56" rx="18" class="card"/>
-  <text x="1159" y="438" text-anchor="middle" class="card-title">Release</text>
-  <text x="1159" y="456" text-anchor="middle" class="card-copy">views · manifests · workflow specs</text>
-
-  <line x1="700" y1="492" x2="700" y2="524" class="line"/>
-  <circle cx="700" cy="508" r="8" class="node"/>
-
-  <rect x="56" y="524" width="1288" height="114" rx="26" class="panel"/>
-  <rect x="84" y="548" width="116" height="26" rx="13" class="chip"/>
-  <text x="142" y="565" text-anchor="middle" class="section-chip">3 · RUNTIME</text>
-  <text x="84" y="604" class="section-title">Control plane</text>
-
-  <rect x="84" y="574" width="372" height="42" rx="16" class="card"/>
-  <text x="270" y="593" text-anchor="middle" class="card-title">Registry API</text>
-  <text x="270" y="610" text-anchor="middle" class="card-copy">runs · datasets · backends</text>
-
-  <rect x="514" y="574" width="372" height="42" rx="16" class="card"/>
-  <text x="700" y="593" text-anchor="middle" class="card-title">Replay</text>
-  <text x="700" y="610" text-anchor="middle" class="card-copy">save spec · rerun · migrate</text>
-
-  <rect x="944" y="574" width="372" height="42" rx="16" class="card"/>
-  <text x="1130" y="593" text-anchor="middle" class="card-title">Portable engines</text>
-  <text x="1130" y="610" text-anchor="middle" class="card-copy">pandas · Spark · Flink</text>
-
-  <line x1="700" y1="638" x2="700" y2="670" class="line"/>
-  <circle cx="700" cy="654" r="8" class="node"/>
-
-  <rect x="56" y="670" width="1288" height="176" rx="26" class="panel"/>
-  <rect x="84" y="694" width="114" height="26" rx="13" class="chip"/>
-  <text x="141" y="711" text-anchor="middle" class="section-chip">4 · PHASE 2</text>
-  <text x="84" y="750" class="section-title">Training</text>
-
-  <rect x="84" y="732" width="532" height="56" rx="18" class="card"/>
-  <text x="350" y="754" text-anchor="middle" class="card-title">Training workflows</text>
-  <text x="350" y="772" text-anchor="middle" class="card-copy">pretrain · continue · finetune · post-train</text>
-
-  <rect x="652" y="732" width="286" height="56" rx="18" class="card"/>
-  <text x="795" y="754" text-anchor="middle" class="card-title">Model backends</text>
-  <text x="795" y="772" text-anchor="middle" class="card-copy">local · HF open · external closed</text>
-
-  <rect x="974" y="732" width="342" height="56" rx="18" class="card"/>
-  <text x="1145" y="754" text-anchor="middle" class="card-title">Run outputs</text>
-  <text x="1145" y="772" text-anchor="middle" class="card-copy">checkpoints · metrics · manifests</text>
-
-  <rect x="278" y="802" width="248" height="34" rx="17" class="card"/>
-  <text x="402" y="824" text-anchor="middle" class="footer-chip">Reusable data</text>
-  <rect x="560" y="802" width="212" height="34" rx="17" class="card"/>
-  <text x="666" y="824" text-anchor="middle" class="footer-chip">Trained models</text>
-  <rect x="806" y="802" width="314" height="34" rx="17" class="card"/>
-  <text x="963" y="824" text-anchor="middle" class="footer-chip">Reproducible runs</text>
+  <rect x="810" y="442" width="178" height="34" rx="17" class="small-pill"/>
+  <text x="899" y="464" text-anchor="middle" class="chip">reproducible</text>
 </svg>
