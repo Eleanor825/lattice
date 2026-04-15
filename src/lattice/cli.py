@@ -163,7 +163,7 @@ def _build_parser() -> argparse.ArgumentParser:
     phase2_parser.add_argument("--input", required=True, help="Input directory. Raw normalized JSONL or compiled dataset.")
     phase2_parser.add_argument("--output", required=True, help="Output directory for the phase2 run.")
     phase2_parser.add_argument("--run-name", required=True, help="Run name.")
-    phase2_parser.add_argument("--model-backend", required=True, choices=["local_tiny", "external_connector"])
+    phase2_parser.add_argument("--model-backend", required=True, choices=["local_tiny", "hf_causal_lm", "external_connector"])
     phase2_parser.add_argument("--model-name", required=True, help="Model name or model identifier.")
     phase2_parser.add_argument("--provider", default="local", help="Provider name. Example: huggingface, openai_compatible.")
     phase2_parser.add_argument("--model-family", default="open", choices=["open", "closed"], help="Model family.")

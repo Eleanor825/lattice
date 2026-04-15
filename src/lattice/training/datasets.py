@@ -67,3 +67,14 @@ def load_posttrain_texts(dataset_dir: str | Path) -> list[str]:
         ]
     return load_supervised_texts(dataset_dir)
 
+
+def load_texts_for_workflow(workflow: str, dataset_dir: str | Path) -> list[str]:
+    if workflow == "pretrain":
+        return load_pretrain_texts(dataset_dir)
+    if workflow == "continue":
+        return load_pretrain_texts(dataset_dir)
+    if workflow == "finetune":
+        return load_supervised_texts(dataset_dir)
+    if workflow == "posttrain":
+        return load_posttrain_texts(dataset_dir)
+    raise ValueError(f"Unsupported workflow: {workflow}")
