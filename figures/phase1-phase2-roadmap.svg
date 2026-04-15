@@ -1,168 +1,167 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1180" role="img" aria-labelledby="title desc">
-  <title id="title">Lattice System Architecture</title>
-  <desc id="desc">A product-style architecture overview of Lattice from data sources through the Phase 1 foundation, platform runtime, Phase 2 training workflows, and final deliverables.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 980" role="img" aria-labelledby="title desc">
+  <title id="title">Lattice Platform Overview</title>
+  <desc id="desc">A concise, product-style overview of Lattice from scientific data sources through data foundation, runtime, and training workflows.</desc>
   <defs>
-    <linearGradient id="pageBg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#fbfcfe"/>
-      <stop offset="100%" stop-color="#f2f6fb"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f9fbfd"/>
+      <stop offset="100%" stop-color="#eef3f8"/>
     </linearGradient>
-    <linearGradient id="heroBg" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#3156d3"/>
     </linearGradient>
-    <filter id="panelShadow" x="-20%" y="-20%" width="140%" height="160%">
-      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#0f172a" flood-opacity="0.08"/>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="22" flood-color="#0f172a" flood-opacity="0.08"/>
     </filter>
-    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="160%">
-      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#0f172a" flood-opacity="0.06"/>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#0f172a" flood-opacity="0.05"/>
     </filter>
     <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto-start-reverse">
-      <path d="M1 1 L11 6 L1 11 Z" fill="#475569"/>
+      <path d="M1 1 L11 6 L1 11 Z" fill="#5b6474"/>
     </marker>
     <style>
-      .kicker { font: 700 13px 'Inter', 'Segoe UI', Arial, sans-serif; letter-spacing: 0.24em; fill: rgba(255,255,255,0.72); }
-      .hero-title { font: 700 48px 'Inter', 'Segoe UI', Arial, sans-serif; fill: #ffffff; }
-      .hero-subtitle { font: 500 21px 'Inter', 'Segoe UI', Arial, sans-serif; fill: rgba(255,255,255,0.84); }
-      .pill-text { font: 700 14px 'Inter', 'Segoe UI', Arial, sans-serif; fill: #e2e8f0; }
-      .section-chip { font: 700 14px 'Inter', 'Segoe UI', Arial, sans-serif; letter-spacing: 0.08em; }
-      .section-title { font: 700 30px 'Inter', 'Segoe UI', Arial, sans-serif; fill: #0f172a; }
-      .section-copy { font: 500 17px 'Inter', 'Segoe UI', Arial, sans-serif; fill: #64748b; }
-      .card-title { font: 700 22px 'Inter', 'Segoe UI', Arial, sans-serif; }
-      .card-copy { font: 550 16px 'Inter', 'Segoe UI', Arial, sans-serif; fill: #334155; }
-      .mini-copy { font: 600 15px 'Inter', 'Segoe UI', Arial, sans-serif; fill: #475569; }
-      .outcome-text { font: 700 19px 'Inter', 'Segoe UI', Arial, sans-serif; fill: #0f172a; }
-      .panel { fill: #ffffff; stroke: #dde6f0; stroke-width: 1.5; filter: url(#panelShadow); }
-      .card { stroke-width: 1.5; filter: url(#softShadow); }
+      .hero-kicker { font: 700 13px 'Inter','Segoe UI',Arial,sans-serif; letter-spacing: 0.24em; fill: rgba(255,255,255,0.68); }
+      .hero-title { font: 700 50px 'Inter','Segoe UI',Arial,sans-serif; fill: #ffffff; }
+      .hero-sub { font: 500 22px 'Inter','Segoe UI',Arial,sans-serif; fill: rgba(255,255,255,0.86); }
+      .hero-pill { font: 700 14px 'Inter','Segoe UI',Arial,sans-serif; fill: #e7ecff; }
+      .section-chip { font: 700 14px 'Inter','Segoe UI',Arial,sans-serif; letter-spacing: 0.08em; }
+      .section-title { font: 700 29px 'Inter','Segoe UI',Arial,sans-serif; fill: #0f172a; }
+      .card-title { font: 700 22px 'Inter','Segoe UI',Arial,sans-serif; }
+      .card-copy { font: 600 16px 'Inter','Segoe UI',Arial,sans-serif; fill: #475569; }
+      .footer-chip { font: 700 18px 'Inter','Segoe UI',Arial,sans-serif; fill: #0f172a; }
+      .panel { fill: #ffffff; stroke: #dce5ef; stroke-width: 1.5; filter: url(#shadow); }
+      .card { stroke-width: 1.5; filter: url(#soft); }
       .source-card { fill: #fff7ed; stroke: #fdba74; }
-      .phase1-card { fill: #eff6ff; stroke: #93c5fd; }
-      .runtime-card { fill: #eef2ff; stroke: #a5b4fc; }
-      .phase2-card { fill: #ecfdf5; stroke: #86efac; }
-      .outcome-card { fill: #f8fafc; stroke: #cbd5e1; }
+      .phase1-card { fill: #eef5ff; stroke: #9bc0ff; }
+      .runtime-card { fill: #f1efff; stroke: #c2b4ff; }
+      .phase2-card { fill: #edfdf6; stroke: #98e7bc; }
+      .out-card { fill: #f8fafc; stroke: #cbd5e1; }
       .source-text { fill: #9a3412; }
-      .phase1-text { fill: #1d4ed8; }
-      .runtime-text { fill: #4338ca; }
-      .phase2-text { fill: #047857; }
-      .arrow { stroke: #64748b; stroke-width: 3.5; fill: none; marker-end: url(#arrow); stroke-linecap: round; }
-      .inline-arrow { stroke: #94a3b8; stroke-width: 2.5; fill: none; marker-end: url(#arrow); stroke-linecap: round; }
-      .node { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; }
+      .phase1-text { fill: #2055cf; }
+      .runtime-text { fill: #5b35d6; }
+      .phase2-text { fill: #0b7b5a; }
+      .line { stroke: #8c97a8; stroke-width: 3.5; fill: none; marker-end: url(#arrow); stroke-linecap: round; }
+      .inline { stroke: #a8b2c1; stroke-width: 2.5; fill: none; marker-end: url(#arrow); stroke-linecap: round; }
+      .node { fill: #ffffff; stroke: #b8c2d2; stroke-width: 3; }
+      .crystal { stroke: rgba(255,255,255,0.34); stroke-width: 2; fill: none; }
+      .crystal-node { fill: rgba(255,255,255,0.15); stroke: rgba(255,255,255,0.55); stroke-width: 2; }
     </style>
   </defs>
 
-  <rect width="1400" height="1180" fill="url(#pageBg)"/>
-  <circle cx="1245" cy="135" r="170" fill="#dbeafe" opacity="0.45"/>
-  <circle cx="1325" cy="70" r="82" fill="#bfdbfe" opacity="0.5"/>
-  <circle cx="118" cy="1095" r="122" fill="#e0f2fe" opacity="0.55"/>
+  <rect width="1400" height="980" fill="url(#bg)"/>
+  <circle cx="1266" cy="88" r="88" fill="#dbeafe" opacity="0.55"/>
+  <circle cx="1308" cy="820" r="140" fill="#dcfce7" opacity="0.45"/>
+  <circle cx="98" cy="894" r="132" fill="#e0f2fe" opacity="0.55"/>
 
-  <rect x="56" y="42" width="1288" height="172" rx="34" fill="url(#heroBg)" filter="url(#panelShadow)"/>
-  <text x="92" y="92" class="kicker">OPEN-SOURCE DATA PLATFORM</text>
-  <text x="92" y="145" class="hero-title">Lattice</text>
-  <text x="92" y="178" class="hero-subtitle">From fragmented scientific sources to reproducible large-model training</text>
+  <rect x="52" y="28" width="1296" height="156" rx="34" fill="url(#hero)" filter="url(#shadow)"/>
+  <text x="88" y="76" class="hero-kicker">OPEN-SOURCE DATA PLATFORM</text>
+  <text x="88" y="128" class="hero-title">Lattice</text>
+  <text x="88" y="160" class="hero-sub">Scientific data to trainable models</text>
 
-  <rect x="946" y="78" width="126" height="40" rx="20" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"/>
-  <text x="1009" y="103" text-anchor="middle" class="pill-text">Phase 1 ready</text>
-  <rect x="1088" y="78" width="122" height="40" rx="20" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"/>
-  <text x="1149" y="103" text-anchor="middle" class="pill-text">Spark + Flink</text>
-  <rect x="1224" y="78" width="88" height="40" rx="20" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"/>
-  <text x="1268" y="103" text-anchor="middle" class="pill-text">Rerun</text>
+  <rect x="940" y="56" width="126" height="38" rx="19" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"/>
+  <text x="1003" y="80" text-anchor="middle" class="hero-pill">Phase 1 ready</text>
+  <rect x="1082" y="56" width="120" height="38" rx="19" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"/>
+  <text x="1142" y="80" text-anchor="middle" class="hero-pill">Spark + Flink</text>
+  <rect x="1216" y="56" width="88" height="38" rx="19" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"/>
+  <text x="1260" y="80" text-anchor="middle" class="hero-pill">Rerun</text>
 
-  <rect x="56" y="254" width="1288" height="162" rx="30" class="panel"/>
-  <rect x="88" y="284" width="104" height="32" rx="16" fill="#fff7ed"/>
-  <text x="140" y="305" text-anchor="middle" class="section-chip source-text">1 · INPUTS</text>
-  <text x="88" y="350" class="section-title">Scientific source layer</text>
-  <text x="88" y="378" class="section-copy">Lattice starts from raw, fragmented knowledge sources rather than pre-made training sets.</text>
+  <path d="M1120 132 L1166 98 L1212 132 L1166 166 Z" class="crystal"/>
+  <path d="M1166 98 L1230 86 L1274 122 L1258 182 L1190 194 L1140 162 Z" class="crystal"/>
+  <line x1="1166" y1="98" x2="1190" y2="194" class="crystal"/>
+  <line x1="1230" y1="86" x2="1140" y2="162" class="crystal"/>
+  <line x1="1212" y1="132" x2="1258" y2="182" class="crystal"/>
+  <circle cx="1166" cy="98" r="6" class="crystal-node"/>
+  <circle cx="1230" cy="86" r="6" class="crystal-node"/>
+  <circle cx="1274" cy="122" r="6" class="crystal-node"/>
+  <circle cx="1258" cy="182" r="6" class="crystal-node"/>
+  <circle cx="1190" cy="194" r="6" class="crystal-node"/>
+  <circle cx="1140" cy="162" r="6" class="crystal-node"/>
 
-  <rect x="88" y="330" width="372" height="60" rx="20" class="card source-card"/>
-  <text x="274" y="355" text-anchor="middle" class="card-title source-text">Papers and metadata</text>
-  <text x="274" y="379" text-anchor="middle" class="mini-copy">OpenAlex · Crossref · arXiv · Europe PMC</text>
+  <rect x="52" y="222" width="1296" height="126" rx="28" class="panel"/>
+  <rect x="84" y="250" width="104" height="30" rx="15" fill="#fff1e6"/>
+  <text x="136" y="270" text-anchor="middle" class="section-chip source-text">1 · SOURCES</text>
 
-  <rect x="514" y="330" width="372" height="60" rx="20" class="card source-card"/>
-  <text x="700" y="355" text-anchor="middle" class="card-title source-text">Materials databases</text>
-  <text x="700" y="379" text-anchor="middle" class="mini-copy">Materials Project · OQMD · NOMAD · JARVIS</text>
+  <rect x="84" y="286" width="382" height="48" rx="18" class="card source-card"/>
+  <text x="275" y="307" text-anchor="middle" class="card-title source-text">Papers</text>
+  <text x="275" y="326" text-anchor="middle" class="card-copy">OpenAlex · Crossref · arXiv · Europe PMC</text>
 
-  <rect x="940" y="330" width="372" height="60" rx="20" class="card source-card"/>
-  <text x="1126" y="355" text-anchor="middle" class="card-title source-text">Chemistry and knowledge</text>
-  <text x="1126" y="379" text-anchor="middle" class="mini-copy">PubChem · Wikidata · NIST · reaction and catalysis data</text>
+  <rect x="509" y="286" width="382" height="48" rx="18" class="card source-card"/>
+  <text x="700" y="307" text-anchor="middle" class="card-title source-text">Materials DBs</text>
+  <text x="700" y="326" text-anchor="middle" class="card-copy">Materials Project · OQMD · NOMAD · JARVIS</text>
 
-  <line x1="700" y1="416" x2="700" y2="458" class="arrow"/>
-  <circle cx="700" cy="437" r="8" fill="#ffffff" stroke="#94a3b8" stroke-width="3"/>
+  <rect x="934" y="286" width="382" height="48" rx="18" class="card source-card"/>
+  <text x="1125" y="307" text-anchor="middle" class="card-title source-text">Chemistry + knowledge</text>
+  <text x="1125" y="326" text-anchor="middle" class="card-copy">PubChem · Wikidata · NIST · catalysis data</text>
 
-  <rect x="56" y="458" width="1288" height="214" rx="30" class="panel"/>
-  <rect x="88" y="488" width="124" height="32" rx="16" fill="#eff6ff"/>
-  <text x="150" y="509" text-anchor="middle" class="section-chip phase1-text">2 · PHASE 1</text>
-  <text x="88" y="554" class="section-title">Data foundation</text>
-  <text x="88" y="582" class="section-copy">A stable data-production chain that normalizes, scores, and releases training-ready assets.</text>
+  <line x1="700" y1="348" x2="700" y2="388" class="line"/>
+  <circle cx="700" cy="368" r="8" class="node"/>
 
-  <rect x="88" y="602" width="282" height="88" rx="22" class="card phase1-card"/>
-  <text x="229" y="632" text-anchor="middle" class="card-title phase1-text">Registry and connectors</text>
-  <text x="229" y="658" text-anchor="middle" class="card-copy">source catalog</text>
-  <text x="229" y="680" text-anchor="middle" class="card-copy">fetch adapters</text>
+  <rect x="52" y="388" width="1296" height="154" rx="28" class="panel"/>
+  <rect x="84" y="422" width="116" height="30" rx="15" fill="#edf4ff"/>
+  <text x="142" y="442" text-anchor="middle" class="section-chip phase1-text">2 · PHASE 1</text>
 
-  <rect x="394" y="602" width="282" height="88" rx="22" class="card phase1-card"/>
-  <text x="535" y="632" text-anchor="middle" class="card-title phase1-text">Normalize schema</text>
-  <text x="535" y="658" text-anchor="middle" class="card-copy">Document</text>
-  <text x="535" y="680" text-anchor="middle" class="card-copy">Structured + knowledge records</text>
+  <rect x="84" y="466" width="284" height="62" rx="22" class="card phase1-card"/>
+  <text x="226" y="491" text-anchor="middle" class="card-title phase1-text">Connect</text>
+  <text x="226" y="513" text-anchor="middle" class="card-copy">registry · adapters</text>
 
-  <rect x="700" y="602" width="282" height="88" rx="22" class="card phase1-card"/>
-  <text x="841" y="632" text-anchor="middle" class="card-title phase1-text">Quality and lineage</text>
-  <text x="841" y="658" text-anchor="middle" class="card-copy">provenance · license</text>
-  <text x="841" y="680" text-anchor="middle" class="card-copy">dedup · filtering</text>
+  <rect x="390" y="466" width="284" height="62" rx="22" class="card phase1-card"/>
+  <text x="532" y="491" text-anchor="middle" class="card-title phase1-text">Normalize</text>
+  <text x="532" y="513" text-anchor="middle" class="card-copy">documents · structured records</text>
 
-  <rect x="1006" y="602" width="306" height="88" rx="22" class="card phase1-card"/>
-  <text x="1159" y="632" text-anchor="middle" class="card-title phase1-text">Compile and release</text>
-  <text x="1159" y="658" text-anchor="middle" class="card-copy">pretrain · QA · instruction</text>
-  <text x="1159" y="680" text-anchor="middle" class="card-copy">manifests + workflow specs</text>
+  <rect x="696" y="466" width="284" height="62" rx="22" class="card phase1-card"/>
+  <text x="838" y="491" text-anchor="middle" class="card-title phase1-text">Curate</text>
+  <text x="838" y="513" text-anchor="middle" class="card-copy">lineage · license · dedup</text>
 
-  <line x1="370" y1="646" x2="394" y2="646" class="inline-arrow"/>
-  <line x1="676" y1="646" x2="700" y2="646" class="inline-arrow"/>
-  <line x1="982" y1="646" x2="1006" y2="646" class="inline-arrow"/>
+  <rect x="1002" y="466" width="314" height="62" rx="22" class="card phase1-card"/>
+  <text x="1159" y="491" text-anchor="middle" class="card-title phase1-text">Release</text>
+  <text x="1159" y="513" text-anchor="middle" class="card-copy">views · manifests · workflow specs</text>
 
-  <line x1="700" y1="672" x2="700" y2="734" class="arrow"/>
-  <circle cx="700" cy="704" r="8" fill="#ffffff" stroke="#94a3b8" stroke-width="3"/>
+  <line x1="368" y1="497" x2="390" y2="497" class="inline"/>
+  <line x1="674" y1="497" x2="696" y2="497" class="inline"/>
+  <line x1="980" y1="497" x2="1002" y2="497" class="inline"/>
 
-  <rect x="56" y="734" width="1288" height="178" rx="30" class="panel"/>
-  <rect x="88" y="764" width="146" height="32" rx="16" fill="#eef2ff"/>
-  <text x="161" y="785" text-anchor="middle" class="section-chip runtime-text">3 · RUNTIME</text>
-  <text x="88" y="830" class="section-title">Platform control plane</text>
-  <text x="88" y="858" class="section-copy">The layer that makes jobs traceable, replayable, and portable across engines.</text>
+  <line x1="700" y1="542" x2="700" y2="582" class="line"/>
+  <circle cx="700" cy="562" r="8" class="node"/>
 
-  <rect x="88" y="828" width="370" height="60" rx="20" class="card runtime-card"/>
-  <text x="273" y="853" text-anchor="middle" class="card-title runtime-text">Registry API</text>
-  <text x="273" y="877" text-anchor="middle" class="mini-copy">runs · datasets · backends</text>
+  <rect x="52" y="582" width="1296" height="128" rx="28" class="panel"/>
+  <rect x="84" y="610" width="116" height="30" rx="15" fill="#f2efff"/>
+  <text x="142" y="630" text-anchor="middle" class="section-chip runtime-text">3 · RUNTIME</text>
 
-  <rect x="515" y="828" width="370" height="60" rx="20" class="card runtime-card"/>
-  <text x="700" y="853" text-anchor="middle" class="card-title runtime-text">Workflow replay</text>
-  <text x="700" y="877" text-anchor="middle" class="mini-copy">save spec · rerun · migrate</text>
+  <rect x="84" y="644" width="372" height="50" rx="20" class="card runtime-card"/>
+  <text x="270" y="665" text-anchor="middle" class="card-title runtime-text">Registry API</text>
+  <text x="270" y="685" text-anchor="middle" class="card-copy">runs · datasets · backends</text>
 
-  <rect x="942" y="828" width="370" height="60" rx="20" class="card runtime-card"/>
-  <text x="1127" y="853" text-anchor="middle" class="card-title runtime-text">Portable execution</text>
-  <text x="1127" y="877" text-anchor="middle" class="mini-copy">pandas · Spark · Flink</text>
+  <rect x="514" y="644" width="372" height="50" rx="20" class="card runtime-card"/>
+  <text x="700" y="665" text-anchor="middle" class="card-title runtime-text">Replay</text>
+  <text x="700" y="685" text-anchor="middle" class="card-copy">save spec · rerun · migrate</text>
 
-  <line x1="700" y1="912" x2="700" y2="954" class="arrow"/>
-  <circle cx="700" cy="933" r="8" fill="#ffffff" stroke="#94a3b8" stroke-width="3"/>
+  <rect x="944" y="644" width="372" height="50" rx="20" class="card runtime-card"/>
+  <text x="1130" y="665" text-anchor="middle" class="card-title runtime-text">Portable engines</text>
+  <text x="1130" y="685" text-anchor="middle" class="card-copy">pandas · Spark · Flink</text>
 
-  <rect x="56" y="954" width="1288" height="176" rx="30" class="panel"/>
-  <rect x="88" y="984" width="132" height="32" rx="16" fill="#ecfdf5"/>
-  <text x="154" y="1005" text-anchor="middle" class="section-chip phase2-text">4 · PHASE 2</text>
-  <text x="88" y="1050" class="section-title">Training and optimization</text>
-  <text x="88" y="1078" class="section-copy">The data foundation feeds executable workflows, model backends, and reproducible outputs.</text>
+  <line x1="700" y1="710" x2="700" y2="750" class="line"/>
+  <circle cx="700" cy="730" r="8" class="node"/>
 
-  <rect x="88" y="1048" width="530" height="60" rx="20" class="card phase2-card"/>
-  <text x="353" y="1073" text-anchor="middle" class="card-title phase2-text">Training workflows</text>
-  <text x="353" y="1097" text-anchor="middle" class="mini-copy">pretrain · continue · finetune · post-train</text>
+  <rect x="52" y="750" width="1296" height="180" rx="28" class="panel"/>
+  <rect x="84" y="778" width="116" height="30" rx="15" fill="#eefcf4"/>
+  <text x="142" y="798" text-anchor="middle" class="section-chip phase2-text">4 · PHASE 2</text>
 
-  <rect x="651" y="1048" width="286" height="60" rx="20" class="card phase2-card"/>
-  <text x="794" y="1073" text-anchor="middle" class="card-title phase2-text">Model backends</text>
-  <text x="794" y="1097" text-anchor="middle" class="mini-copy">local · HF open · external closed</text>
+  <rect x="84" y="822" width="532" height="56" rx="20" class="card phase2-card"/>
+  <text x="350" y="846" text-anchor="middle" class="card-title phase2-text">Training workflows</text>
+  <text x="350" y="867" text-anchor="middle" class="card-copy">pretrain · continue · finetune · post-train</text>
 
-  <rect x="970" y="1048" width="342" height="60" rx="20" class="card phase2-card"/>
-  <text x="1141" y="1073" text-anchor="middle" class="card-title phase2-text">Run outputs</text>
-  <text x="1141" y="1097" text-anchor="middle" class="mini-copy">checkpoints · metrics · manifests</text>
+  <rect x="652" y="822" width="286" height="56" rx="20" class="card phase2-card"/>
+  <text x="795" y="846" text-anchor="middle" class="card-title phase2-text">Model backends</text>
+  <text x="795" y="867" text-anchor="middle" class="card-copy">local · HF open · external closed</text>
 
-  <rect x="56" y="1138" width="1288" height="26" rx="13" fill="#ffffff" opacity="0"/>
-  <rect x="318" y="1130" width="238" height="34" rx="17" class="card outcome-card"/>
-  <text x="437" y="1152" text-anchor="middle" class="outcome-text">Reusable data assets</text>
-  <rect x="582" y="1130" width="214" height="34" rx="17" class="card outcome-card"/>
-  <text x="689" y="1152" text-anchor="middle" class="outcome-text">Improved models</text>
-  <rect x="822" y="1130" width="282" height="34" rx="17" class="card outcome-card"/>
-  <text x="963" y="1152" text-anchor="middle" class="outcome-text">Traceable reproduction</text>
+  <rect x="974" y="822" width="342" height="56" rx="20" class="card phase2-card"/>
+  <text x="1145" y="846" text-anchor="middle" class="card-title phase2-text">Run outputs</text>
+  <text x="1145" y="867" text-anchor="middle" class="card-copy">checkpoints · metrics · manifests</text>
+
+  <rect x="284" y="890" width="244" height="32" rx="16" class="card out-card"/>
+  <text x="406" y="911" text-anchor="middle" class="footer-chip">Reusable data</text>
+  <rect x="562" y="890" width="212" height="32" rx="16" class="card out-card"/>
+  <text x="668" y="911" text-anchor="middle" class="footer-chip">Trained models</text>
+  <rect x="808" y="890" width="308" height="32" rx="16" class="card out-card"/>
+  <text x="962" y="911" text-anchor="middle" class="footer-chip">Reproducible runs</text>
 </svg>
