@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from lattice.compiler import CompilerConfig, compile_dataset
+from lattice.reports import build_phase1_quality_report
 from lattice.platform.runtime import build_phase1_spec
 from lattice.platform.sync import sync_phase1_manifest
 from lattice.silver import SilverLinkConfig, build_silver_layer
@@ -109,7 +110,14 @@ def run_phase1_pipeline(config: Phase1Config) -> dict[str, Any]:
         "silver": silver_manifest,
         "gold": gold_manifest,
     }
-    write_json(paths["manifests"] / "phase1_manifest.json", phase1_manifest)
+    phase1_manifest_path = paths["manifests"] / "phase1_manifest.json"
+    write_json(phase1_manifest_path, phase1_manifest)
+    quality_report = build_phase1_quality_report(phase1_manifest_path, config.registry_path)
+    phase1_manifest["quality_report_path"] = quality_report["quality_report_path"]
+    phase1_manifest["source_inventory_path"] = quality_report["source_inventory_path"]
+    phase1_manifest["quality_markdown_path"] = quality_report["quality_markdown_path"]
+    phase1_manifest["quality_summary"] = quality_report["report"]["quality"]
+    write_json(phase1_manifest_path, phase1_manifest)
     if config.registry_db:
-        sync_phase1_manifest(config.registry_db, paths["manifests"] / "phase1_manifest.json")
+        sync_phase1_manifest(config.registry_db, phase1_manifest_path)
     return phase1_manifest

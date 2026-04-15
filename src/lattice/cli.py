@@ -11,6 +11,7 @@ from lattice.phase2 import Phase2Config, run_phase2_pipeline
 from lattice.platform import run_workflow_spec, workflow_spec_from_dict
 from lattice.platform.jobs import rerun_job
 from lattice.platform.server import create_app
+from lattice.reports import build_phase1_quality_report
 from lattice.platform.sync import sync_phase1_manifest, sync_phase2_manifest
 from lattice.sources import DemoFetchConfig, SourceFetchConfig, run_demo_fetch, run_source_fetch
 from lattice.training import TrainingConfig, run_training_workflow
@@ -143,6 +144,28 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Also include optional sources when selecting from the registry automatically.",
     )
     phase1_parser.add_argument("--registry-db", default="", help="Optional SQLite registry DB path.")
+
+    phase1_open_parser = subparsers.add_parser(
+        "phase1-open-run",
+        help="Run a Phase 1 release over all currently implemented open-source connectors and emit quality reports.",
+    )
+    phase1_open_parser.add_argument("--data-root", required=True)
+    phase1_open_parser.add_argument("--registry", default="configs/source_registry.json")
+    phase1_open_parser.add_argument("--domain", default="materials")
+    phase1_open_parser.add_argument("--release-name", required=True)
+    phase1_open_parser.add_argument("--query", default="solid state battery electrolyte")
+    phase1_open_parser.add_argument("--element", action="append", default=[])
+    phase1_open_parser.add_argument("--compound", action="append", default=[])
+    phase1_open_parser.add_argument("--limit", type=int, default=1)
+    phase1_open_parser.add_argument("--include-optional-sources", action="store_true")
+    phase1_open_parser.add_argument("--registry-db", default="", help="Optional SQLite registry DB path.")
+
+    phase1_report_parser = subparsers.add_parser(
+        "phase1-report",
+        help="Build or rebuild a Phase 1 quality report from an existing phase1 manifest.",
+    )
+    phase1_report_parser.add_argument("--manifest", required=True, help="Path to phase1_manifest.json")
+    phase1_report_parser.add_argument("--registry", default="configs/source_registry.json")
 
     for workflow_name in ("train-pretrain", "train-continue", "train-finetune", "train-post"):
         train_parser = subparsers.add_parser(workflow_name, help=f"Run the {workflow_name.replace('train-', '')} workflow.")
@@ -318,6 +341,31 @@ def _handle_phase1_run(args: argparse.Namespace) -> int:
     )
     manifest = run_phase1_pipeline(config)
     print(json.dumps(manifest, indent=2, ensure_ascii=False))
+    return 0
+
+
+def _handle_phase1_open_run(args: argparse.Namespace) -> int:
+    config = Phase1Config(
+        data_root=args.data_root,
+        registry_path=args.registry,
+        domain=args.domain,
+        release_name=args.release_name,
+        query=args.query,
+        elements=_elements_or_default(args.element),
+        compounds=_compounds_or_default(args.compound),
+        sources=[],
+        limit=args.limit,
+        include_optional_sources=args.include_optional_sources,
+        registry_db=args.registry_db,
+    )
+    manifest = run_phase1_pipeline(config)
+    print(json.dumps(manifest, indent=2, ensure_ascii=False))
+    return 0
+
+
+def _handle_phase1_report(args: argparse.Namespace) -> int:
+    payload = build_phase1_quality_report(args.manifest, args.registry)
+    print(json.dumps(payload, indent=2, ensure_ascii=False))
     return 0
 
 
@@ -516,6 +564,10 @@ def main(argv: list[str] | None = None) -> int:
         return _handle_fetch_sources(args)
     if args.command == "phase1-run":
         return _handle_phase1_run(args)
+    if args.command == "phase1-open-run":
+        return _handle_phase1_open_run(args)
+    if args.command == "phase1-report":
+        return _handle_phase1_report(args)
     if args.command == "train-pretrain":
         return _handle_training_workflow(args, "pretrain")
     if args.command == "train-continue":
